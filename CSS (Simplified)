@@ -1,0 +1,11 @@
+#clock-container {
+  font-size: 10vw; /* Adjust for large text */
+  text-align: center;
+  /* More styling for centering and colors */
+}
+
+/* Styles for full-screen mode (example) */
+body.fullscreen #clock-container {
+  font-size: 30vh; /* Larger font in full-screen */
+  /* Adjust other styles */
+}
