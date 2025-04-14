@@ -26,7 +26,15 @@
   <div id="digital-clock"></div>
 </section>
  class="active">⌚ Relógio</section>
-    <section id="alarm">⏰ Alarme</section>
+   <section id="alarm">
+  <h2>Alarme</h2>
+  <label for="alarm-time">Escolha o horário:</label>
+  <input type="time" id="alarm-time">
+  <button onclick="setAlarm()">Ativar Alarme</button>
+  <button onclick="clearAlarm()">Cancelar Alarme</button>
+  <p id="alarm-status">Nenhum alarme definido</p>
+</section>
+⏰ Alarme</section>
     <section id="stopwatch">⏱️ Cronômetro</section>
     <section id="timer">⏲️ Timer</section>
     <section id="pomodoro">🍅 Pomodoro</section>
