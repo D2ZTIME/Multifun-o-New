@@ -1,69 +1,235 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>vClock Clone</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relógio Digital - D2Z</title>
   <style>
+    :root {
+      --bg-color: #111;
+      --text-color: #eee;
+      --accent-color: #00ffae;
+    }
     body {
-      font-family: Arial, sans-serif;
-      background: #111;
-      color: #fff;
       margin: 0;
-      padding: 0;
-      text-align: center;
-    }
-    header {
-      background: #000;
-      padding: 20px;
-      font-size: 24px;
-      font-weight: bold;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.5);
-    }
-    nav {
-      background: #222;
-      padding: 10px;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
       display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: start;
+      min-height: 100vh;
+      padding: 20px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    h1 {
+      font-size: 3rem;
+      margin: 0.5em 0;
+    }
+    #clock {
+      font-size: 5rem;
+      font-weight: bold;
+      color: var(--accent-color);
+      margin-bottom: 20px;
+    }
+    .controls, .alarm-controls, .timer-controls {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
       justify-content: center;
-      gap: 20px;
+      gap: 10px;
+      margin: 10px 0;
     }
-    nav a {
-      color: #ddd;
-      text-decoration: none;
-      font-size: 16px;
+    button {
+      background-color: var(--accent-color);
+      border: none;
+      border-radius: 10px;
+      padding: 10px 20px;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s;
     }
-    nav a:hover {
-      color: #fff;
-      text-decoration: underline;
+    button:hover {
+      transform: scale(1.05);
     }
-    .clock {
-      font-size: 80px;
-      margin-top: 100px;
+    input[type="time"], input[type="number"] {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #444;
+      background: #222;
+      color: white;
+    }
+    .hidden { display: none; }
+    .fullscreen-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
     }
   </style>
 </head>
 <body>
-  <header>vClock Clone</header>
-  <nav>
-    <a href="#">Clock</a>
-    <a href="#">Alarm</a>
-    <a href="#">Timer</a>
-    <a href="#">Stopwatch</a>
-    <a href="#">World Clock</a>
-    <a href="#">Pomodoro</a>
-  </nav>
-  <div class="clock" id="clock">00:00:00</div>
+  <button class="fullscreen-btn" onclick="toggleFullscreen()">🖥️ Tela cheia</button>
+  <h1>Relógio Digital</h1>
+  <div id="clock"></div>
+  
+  <div class="controls">
+    <button onclick="toggleTheme()">🌙 Modo</button>
+  </div>
+
+  <h2>⏰ Alarmes</h2>
+  <div class="alarm-controls">
+    <input type="time" id="alarmTime">
+    <button onclick="setAlarm()">Adicionar Alarme</button>
+    <ul id="alarmList"></ul>
+  </div>
+
+  <h2>⏳ Cronômetro</h2>
+  <div id="stopwatchDisplay">00:00:00</div>
+  <div class="controls">
+    <button onclick="startStopwatch()">Iniciar</button>
+    <button onclick="pauseStopwatch()">Pausar</button>
+    <button onclick="resetStopwatch()">Zerar</button>
+  </div>
+
+  <h2>⏲️ Timer</h2>
+  <div class="timer-controls">
+    <input type="number" id="timerMinutes" placeholder="Minutos">
+    <button onclick="startTimer()">Iniciar</button>
+    <button onclick="stopTimer()">Parar</button>
+    <div id="timerDisplay">00:00</div>
+  </div>
+
+  <audio id="alarmSound" src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg"></audio>
 
   <script>
+    const clock = document.getElementById("clock");
+    const alarmList = document.getElementById("alarmList");
+    const alarmSound = document.getElementById("alarmSound");
+    let alarms = JSON.parse(localStorage.getItem("alarms")) || [];
+
     function updateClock() {
       const now = new Date();
-      const hours = String(now.getHours()).padStart(2, '0');
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      const seconds = String(now.getSeconds()).padStart(2, '0');
-      document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+      clock.textContent = now.toLocaleTimeString();
+      checkAlarms(now);
     }
     setInterval(updateClock, 1000);
-    updateClock();
+
+    function setAlarm() {
+      const time = document.getElementById("alarmTime").value;
+      if (time && !alarms.includes(time)) {
+        alarms.push(time);
+        localStorage.setItem("alarms", JSON.stringify(alarms));
+        renderAlarms();
+      }
+    }
+
+    function renderAlarms() {
+      alarmList.innerHTML = "";
+      alarms.forEach((alarm, index) => {
+        const li = document.createElement("li");
+        li.textContent = alarm;
+        const delBtn = document.createElement("button");
+        delBtn.textContent = "❌";
+        delBtn.onclick = () => removeAlarm(index);
+        li.appendChild(delBtn);
+        alarmList.appendChild(li);
+      });
+    }
+
+    function removeAlarm(index) {
+      alarms.splice(index, 1);
+      localStorage.setItem("alarms", JSON.stringify(alarms));
+      renderAlarms();
+    }
+
+    function checkAlarms(now) {
+      const currentTime = now.toTimeString().slice(0, 5);
+      if (alarms.includes(currentTime)) {
+        alarmSound.play();
+        alert("⏰ Alarme: " + currentTime);
+        alarms = alarms.filter(time => time !== currentTime);
+        localStorage.setItem("alarms", JSON.stringify(alarms));
+        renderAlarms();
+      }
+    }
+
+    renderAlarms();
+
+    // Cronômetro
+    let stopwatchInterval;
+    let stopwatchTime = 0;
+
+    function startStopwatch() {
+      clearInterval(stopwatchInterval);
+      stopwatchInterval = setInterval(() => {
+        stopwatchTime++;
+        updateStopwatchDisplay();
+      }, 1000);
+    }
+
+    function pauseStopwatch() {
+      clearInterval(stopwatchInterval);
+    }
+
+    function resetStopwatch() {
+      clearInterval(stopwatchInterval);
+      stopwatchTime = 0;
+      updateStopwatchDisplay();
+    }
+
+    function updateStopwatchDisplay() {
+      const hours = String(Math.floor(stopwatchTime / 3600)).padStart(2, '0');
+      const minutes = String(Math.floor((stopwatchTime % 3600) / 60)).padStart(2, '0');
+      const seconds = String(stopwatchTime % 60).padStart(2, '0');
+      document.getElementById("stopwatchDisplay").textContent = `${hours}:${minutes}:${seconds}`;
+    }
+
+    // Timer
+    let timerInterval;
+    function startTimer() {
+      const minutes = parseInt(document.getElementById("timerMinutes").value);
+      if (isNaN(minutes) || minutes <= 0) return;
+      let timeLeft = minutes * 60;
+      clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          document.getElementById("timerDisplay").textContent = "00:00";
+          alarmSound.play();
+          alert("⏲️ Tempo esgotado!");
+        } else {
+          timeLeft--;
+          const m = String(Math.floor(timeLeft / 60)).padStart(2, '0');
+          const s = String(timeLeft % 60).padStart(2, '0');
+          document.getElementById("timerDisplay").textContent = `${m}:${s}`;
+        }
+      }, 1000);
+    }
+
+    function stopTimer() {
+      clearInterval(timerInterval);
+      document.getElementById("timerDisplay").textContent = "00:00";
+    }
+
+    // Tema
+    function toggleTheme() {
+      const dark = document.body.style.backgroundColor === "white";
+      document.body.style.backgroundColor = dark ? "#111" : "white";
+      document.body.style.color = dark ? "#eee" : "#111";
+    }
+
+    // Fullscreen
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
   </script>
 </body>
 </html>
