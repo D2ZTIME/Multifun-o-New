@@ -100,3 +100,49 @@ function resetStopwatch() {
   stopwatchTime = 0;
   updateStopwatchDisplay();
 }
+let timerInterval;
+let timerTime = 0;
+let timerRunning = false;
+
+function updateTimerDisplay() {
+  const minutes = String(Math.floor(timerTime / 60)).padStart(2, "0");
+  const seconds = String(timerTime % 60).padStart(2, "0");
+  document.getElementById("timer-display").textContent = `${minutes}:${seconds}`;
+}
+
+function startTimer() {
+  if (!timerRunning) {
+    const inputMinutes = parseInt(document.getElementById("timer-minutes").value) || 0;
+    const inputSeconds = parseInt(document.getElementById("timer-seconds").value) || 0;
+    
+    if (timerTime === 0) {
+      timerTime = inputMinutes * 60 + inputSeconds;
+    }
+
+    if (timerTime > 0) {
+      timerRunning = true;
+      timerInterval = setInterval(() => {
+        if (timerTime > 0) {
+          timerTime--;
+          updateTimerDisplay();
+        } else {
+          clearInterval(timerInterval);
+          timerRunning = false;
+          alert("⏰ Tempo esgotado!");
+        }
+      }, 1000);
+    }
+  }
+}
+
+function pauseTimer() {
+  clearInterval(timerInterval);
+  timerRunning = false;
+}
+
+function resetTimer() {
+  clearInterval(timerInterval);
+  timerRunning = false;
+  timerTime = 0;
+  updateTimerDisplay();
+}
