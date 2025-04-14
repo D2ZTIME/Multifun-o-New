@@ -121,4 +121,8 @@
   margin-top: 2rem;
   font-size: 1.1rem;
 }
+<input type="time" id="alarm-time">
+<button id="set-alarm">Definir Alarme</button>
+<button id="clear-alarm">Cancelar Alarme</button>
+<p id="alarm-status"></p>
 
