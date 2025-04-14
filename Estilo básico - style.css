@@ -109,3 +109,13 @@ footer {
   margin: 1rem 0;
   font-weight: bold;
 }
+#pomodoro {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+#pomodoro-display {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 1rem 0;
+}
