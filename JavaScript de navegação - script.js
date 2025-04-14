@@ -146,3 +146,42 @@ function resetTimer() {
   timerTime = 0;
   updateTimerDisplay();
 }
+let pomodoroTime = 25 * 60; // 25 minutos
+let pomodoroInterval;
+let pomodoroRunning = false;
+
+function updatePomodoroDisplay() {
+  const minutes = String(Math.floor(pomodoroTime / 60)).padStart(2, "0");
+  const seconds = String(pomodoroTime % 60).padStart(2, "0");
+  document.getElementById("pomodoro-display").textContent = `${minutes}:${seconds}`;
+}
+
+function startPomodoro() {
+  if (!pomodoroRunning) {
+    pomodoroRunning = true;
+    pomodoroInterval = setInterval(() => {
+      if (pomodoroTime > 0) {
+        pomodoroTime--;
+        updatePomodoroDisplay();
+      } else {
+        clearInterval(pomodoroInterval);
+        pomodoroRunning = false;
+        alert("🍅 Tempo de foco encerrado! Faça uma pausa de 5 minutos.");
+      }
+    }, 1000);
+  }
+}
+
+function pausePomodoro() {
+  clearInterval(pomodoroInterval);
+  pomodoroRunning = false;
+}
+
+function resetPomodoro() {
+  clearInterval(pomodoroInterval);
+  pomodoroRunning = false;
+  pomodoroTime = 25 * 60;
+  updatePomodoroDisplay();
+}
+
+updatePomodoroDisplay();
