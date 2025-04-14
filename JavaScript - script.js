@@ -244,3 +244,5 @@ if ("geolocation" in navigator) {
   document.getElementById("weather-info").textContent =
     "Geolocalização não suportada neste navegador.";
 }
+document.getElementById("set-alarm").addEventListener("click", setAlarm);
+document.getElementById("clear-alarm").addEventListener("click", clearAlarm);
