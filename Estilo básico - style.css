@@ -67,3 +67,17 @@ footer {
   font-weight: bold;
   color: #00ffaa;
 }
+#alarm {
+  text-align: center;
+}
+
+#alarm-time {
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+#alarm-status {
+  margin-top: 1rem;
+  color: #ff5555;
+  font-weight: bold;
+}
