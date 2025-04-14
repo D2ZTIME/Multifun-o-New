@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>D2Z Clock</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>D2Z Clock</h1>
+    <nav>
+      <ul>
+        <li><button data-section="clock">Relógio</button></li>
+        <li><button data-section="alarm">Alarme</button></li>
+        <li><button data-section="stopwatch">Cronômetro</button></li>
+        <li><button data-section="timer">Timer</button></li>
+        <li><button data-section="pomodoro">Pomodoro</button></li>
+        <li><button data-section="weather">Tempo</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="clock" class="active">⌚ Relógio</section>
+    <section id="alarm">⏰ Alarme</section>
+    <section id="stopwatch">⏱️ Cronômetro</section>
+    <section id="timer">⏲️ Timer</section>
+    <section id="pomodoro">🍅 Pomodoro</section>
+    <section id="weather">🌤️ Previsão do Tempo</section>
+  </main>
+
+  <footer>
+    <p>D2Z Clock &copy; 2025</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
