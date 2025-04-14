@@ -246,3 +246,7 @@ if ("geolocation" in navigator) {
 }
 document.getElementById("set-alarm").addEventListener("click", setAlarm);
 document.getElementById("clear-alarm").addEventListener("click", clearAlarm);
+document.getElementById("start-stopwatch").addEventListener("click", startStopwatch);
+document.getElementById("pause-stopwatch").addEventListener("click", pauseStopwatch);
+document.getElementById("reset-stopwatch").addEventListener("click", resetStopwatch);
+
