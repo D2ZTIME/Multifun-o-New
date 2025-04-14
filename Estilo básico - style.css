@@ -61,3 +61,9 @@ footer {
   padding: 1rem;
   text-align: center;
 }
+
+#digital-clock {
+  font-size: 5rem;
+  font-weight: bold;
+  color: #00ffaa;
+}
