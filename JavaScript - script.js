@@ -185,3 +185,62 @@ function resetPomodoro() {
 }
 
 updatePomodoroDisplay();
+
+function fetchWeather(latitude, longitude) {
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`;
+
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      const weather = data.current_weather;
+      const temperature = weather.temperature;
+      const wind = weather.windspeed;
+      const code = weather.weathercode;
+      const condition = getWeatherCondition(code);
+
+      document.getElementById("weather-info").textContent =
+        `Temperatura: ${temperature}°C | Vento: ${wind} km/h | Condição: ${condition}`;
+    })
+    .catch(error => {
+      document.getElementById("weather-info").textContent = "Não foi possível carregar o clima.";
+      console.error("Erro ao buscar clima:", error);
+    });
+}
+
+function getWeatherCondition(code) {
+  const conditions = {
+    0: "Céu limpo",
+    1: "Principalmente limpo",
+    2: "Parcialmente nublado",
+    3: "Nublado",
+    45: "Nevoeiro",
+    48: "Nevoeiro com geada",
+    51: "Garoa leve",
+    53: "Garoa moderada",
+    55: "Garoa intensa",
+    61: "Chuva leve",
+    63: "Chuva moderada",
+    65: "Chuva forte",
+    80: "Chuva passageira leve",
+    81: "Chuva passageira moderada",
+    82: "Chuva passageira forte",
+  };
+  return conditions[code] || "Condição desconhecida";
+}
+
+// Detecta a localização do usuário
+if ("geolocation" in navigator) {
+  navigator.geolocation.getCurrentPosition(
+    position => {
+      const { latitude, longitude } = position.coords;
+      fetchWeather(latitude, longitude);
+    },
+    error => {
+      document.getElementById("weather-info").textContent =
+        "Permissão de localização negada. Não é possível exibir o clima.";
+    }
+  );
+} else {
+  document.getElementById("weather-info").textContent =
+    "Geolocalização não suportada neste navegador.";
+}
