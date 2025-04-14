@@ -66,3 +66,37 @@ function triggerAlarm() {
 
 setInterval(updateClock, 1000);
 updateClock(); // exibe imediatamente
+let stopwatchInterval;
+let stopwatchTime = 0;
+let stopwatchRunning = false;
+
+function updateStopwatchDisplay() {
+  const hours = String(Math.floor(stopwatchTime / 3600)).padStart(2, "0");
+  const minutes = String(Math.floor((stopwatchTime % 3600) / 60)).padStart(2, "0");
+  const seconds = String(stopwatchTime % 60).padStart(2, "0");
+  document.getElementById("stopwatch-display").textContent = `${hours}:${minutes}:${seconds}`;
+}
+
+function startStopwatch() {
+  if (!stopwatchRunning) {
+    stopwatchRunning = true;
+    stopwatchInterval = setInterval(() => {
+      stopwatchTime++;
+      updateStopwatchDisplay();
+    }, 1000);
+  }
+}
+
+function pauseStopwatch() {
+  if (stopwatchRunning) {
+    clearInterval(stopwatchInterval);
+    stopwatchRunning = false;
+  }
+}
+
+function resetStopwatch() {
+  clearInterval(stopwatchInterval);
+  stopwatchRunning = false;
+  stopwatchTime = 0;
+  updateStopwatchDisplay();
+}
