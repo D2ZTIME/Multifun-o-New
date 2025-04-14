@@ -47,6 +47,17 @@
     <section id="pomodoro">🍅 Pomodoro</section>
     <section id="weather">🌤️ Previsão do Tempo</section>
   </main>
+  <section id="timer">
+  <h2>Timer</h2>
+  <div>
+    <input type="number" id="timer-minutes" placeholder="Minutos" min="0">
+    <input type="number" id="timer-seconds" placeholder="Segundos" min="0" max="59">
+  </div>
+  <div id="timer-display">00:00</div>
+  <button onclick="startTimer()">Iniciar</button>
+  <button onclick="pauseTimer()">Pausar</button>
+  <button onclick="resetTimer()">Zerar</button>
+</section>
 
   <footer>
     <p>D2Z Clock &copy; 2025</p>
