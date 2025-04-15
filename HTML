@@ -2,118 +2,86 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>D2Z Clock</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #111;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-    }
-
-    header {
-      width: 100%;
-      background: #222;
-      padding: 10px 0;
-      text-align: center;
-    }
-
-    nav button {
-      background: #333;
-      border: none;
-      color: #fff;
-      padding: 10px 20px;
-      margin: 0 5px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    nav button.active {
-      background: #555;
-    }
-
-    .section {
-      display: none;
-      margin-top: 40px;
-      text-align: center;
-    }
-
-    .section.active {
-      display: block;
-    }
-
-    .clock-display {
-      font-size: 80px;
-      font-weight: bold;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>D2ZTime - Multifuncional</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <header>
+    <h1>D2ZTime Multifuncional</h1>
+    <nav>
+      <button data-section="clock" class="active">Relógio</button>
+      <button data-section="alarm">Alarme</button>
+      <button data-section="stopwatch">Cronômetro</button>
+      <button data-section="timer">Timer</button>
+      <button data-section="pomodoro">Pomodoro</button>
+      <button data-section="weather">Clima</button>
+    </nav>
+  </header>
 
-<header>
-  <nav>
-    <button onclick="showSection('clock')" class="active">Relógio</button>
-    <button onclick="showSection('alarm')">Alarme</button>
-    <button onclick="showSection('stopwatch')">Cronômetro</button>
-    <button onclick="showSection('timer')">Timer</button>
-    <button onclick="showSection('pomodoro')">Pomodoro</button>
-    <button onclick="showSection('weather')">Tempo</button>
-  </nav>
-</header>
+  <main>
+    <section id="clock" class="active">
+      <h2>Relógio Digital</h2>
+      <div id="digital-clock">00:00:00</div>
+    </section>
 
-<main>
-  <section id="clock" class="section active">
-    <div class="clock-display" id="relogio">--:--:--</div>
-  </section>
+    <section id="alarm" style="display: none">
+      <h2>Alarme</h2>
+      <input type="time" id="alarm-time">
+      <button id="set-alarm">Definir Alarme</button>
+      <button id="clear-alarm">Cancelar Alarme</button>
+      <p id="alarm-status"></p>
+    </section>
 
-  <section id="alarm" class="section">
-    <p>⚠️ Em breve: Alarme</p>
-  </section>
+    <section id="stopwatch" style="display: none">
+      <h2>Cronômetro</h2>
+      <div id="stopwatch-display">00:00:00</div>
+      <button id="start-stopwatch">Iniciar</button>
+      <button id="pause-stopwatch">Pausar</button>
+      <button id="reset-stopwatch">Zerar</button>
+    </section>
 
-  <section id="stopwatch" class="section">
-    <p>⏱️ Em breve: Cronômetro</p>
-  </section>
+    <section id="timer" style="display: none">
+      <h2>Timer</h2>
+      <input type="number" id="timer-minutes" placeholder="Minutos">
+      <input type="number" id="timer-seconds" placeholder="Segundos">
+      <div id="timer-display">00:00</div>
+      <button id="start-timer">Iniciar</button>
+      <button id="pause-timer">Pausar</button>
+      <button id="reset-timer">Resetar</button>
+    </section>
 
-  <section id="timer" class="section">
-    <p>⏳ Em breve: Timer</p>
-  </section>
+    <section id="pomodoro" style="display: none">
+      <h2>Pomodoro</h2>
+      <div id="pomodoro-display">25:00</div>
+      <button id="start-pomodoro">Iniciar</button>
+      <button id="pause-pomodoro">Pausar</button>
+      <button id="reset-pomodoro">Resetar</button>
+    </section>
 
-  <section id="pomodoro" class="section">
-    <p>🍅 Em breve: Pomodoro</p>
-  </section>
+    <section id="weather" style="display: none">
+      <h2>Clima Atual</h2>
+      <p id="weather-info">Carregando...</p>
+    </section>
+  </main>
 
-  <section id="weather" class="section">
-    <p>🌤️ Em breve: Previsão do tempo</p>
-  </section>
-</main>
+  <script>
+    const buttons = document.querySelectorAll("nav button");
+    const sections = document.querySelectorAll("main section");
 
-<script>
-  // Relógio digital em tempo real
-  function atualizarRelogio() {
-    const agora = new Date();
-    const horas = agora.getHours().toString().padStart(2, '0');
-    const minutos = agora.getMinutes().toString().padStart(2, '0');
-    const segundos = agora.getSeconds().toString().padStart(2, '0');
-    document.getElementById('relogio').textContent = `${horas}:${minutos}:${segundos}`;
-  }
-  setInterval(atualizarRelogio, 1000);
-  atualizarRelogio();
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const target = btn.getAttribute("data-section");
 
-  // Navegação entre seções
-  function showSection(id) {
-    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
-    event.target.classList.add('active');
-  }
-</script>
+        buttons.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
 
+        sections.forEach((sec) => {
+          sec.style.display = sec.id === target ? "block" : "none";
+        });
+      });
+    });
+  </script>
+  <script src="script.js"></script>
 </body>
 </html>
-
