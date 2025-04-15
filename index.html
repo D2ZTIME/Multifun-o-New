@@ -71,19 +71,6 @@
 </body>
 </html>
 
-  <script>
-    const clock = document.getElementById("clock");
-    const alarmList = document.getElementById("alarmList");
-    const alarmSound = document.getElementById("alarmSound");
-    let alarms = JSON.parse(localStorage.getItem("alarms")) || [];
-
-    function updateClock() {
-      const now = new Date();
-      clock.textContent = now.toLocaleTimeString();
-      checkAlarms(now);
-    }
-    setInterval(updateClock, 1000);
-
     function setAlarm() {
       const time = document.getElementById("alarmTime").value;
       if (time && !alarms.includes(time)) {
