@@ -1,0 +1,89 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #111;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  background: #222;
+  padding: 1rem;
+  text-align: center;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+nav ul li button {
+  background: #444;
+  border: none;
+  padding: 0.5rem 1rem;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+nav ul li button:hover,
+nav ul li button.active {
+  background: #00aaff;
+}
+
+main {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+section {
+  display: none;
+  font-size: 2rem;
+}
+
+section.active {
+  display: block;
+}
+
+footer {
+  background: #222;
+  padding: 1rem;
+  text-align: center;
+}
+#digital-clock {
+  font-size: 5rem;
+  font-weight: bold;
+  color: #00ffaa;
+}
+#alarm {
+  text-align: center;
+}
+
+#alarm-time {
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+#alarm-status {
+  margin-top: 1rem;
+  color: #ff5555;
+  font-weight: bold;
+}
+#weather {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 1.1rem;
+}
+
+
