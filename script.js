@@ -1,6 +1,4 @@
-// script.js
-
-// Tabs
+// ===================== Navegação por abas =====================
 const navButtons = document.querySelectorAll('nav button');
 const sections = document.querySelectorAll('main section');
 
@@ -8,13 +6,12 @@ navButtons.forEach((button, index) => {
   button.addEventListener('click', () => {
     navButtons.forEach(btn => btn.classList.remove('active'));
     sections.forEach(sec => sec.classList.remove('active'));
-
     button.classList.add('active');
     sections[index].classList.add('active');
   });
 });
 
-// Digital Clock
+// ===================== Relógio Digital =====================
 function updateDigitalClock() {
   const now = new Date();
   const clock = document.getElementById('digital-clock');
@@ -23,7 +20,7 @@ function updateDigitalClock() {
 setInterval(updateDigitalClock, 1000);
 updateDigitalClock();
 
-// Alarm
+// ===================== Alarme =====================
 let alarmTime = null;
 const alarmAudio = new Audio('https://www.soundjay.com/button/beep-07.wav');
 
@@ -42,7 +39,7 @@ setInterval(() => {
   }
 }, 1000);
 
-// Stopwatch
+// ===================== Cronômetro =====================
 let stopwatchInterval;
 let stopwatchTime = 0;
 
@@ -70,11 +67,13 @@ document.getElementById('reset-stopwatch').addEventListener('click', () => {
   updateStopwatch();
 });
 
-// Timer
+// ===================== Temporizador =====================
 let timerInterval;
 
 document.getElementById('start-timer').addEventListener('click', () => {
   let time = parseInt(document.getElementById('timer-minutes').value) * 60;
+  if (isNaN(time) || time <= 0) return;
+
   clearInterval(timerInterval);
   timerInterval = setInterval(() => {
     if (time > 0) {
@@ -89,7 +88,7 @@ document.getElementById('start-timer').addEventListener('click', () => {
   }, 1000);
 });
 
-// Pomodoro
+// ===================== Pomodoro =====================
 let pomodoroInterval;
 let pomodoroTime = 25 * 60;
 
@@ -120,8 +119,8 @@ document.getElementById('reset-pomodoro').addEventListener('click', () => {
 
 updatePomodoroDisplay();
 
-// Weather (usando localização do navegador e API OpenWeather)
-const apiKey = 'INSIRA_SUA_API_KEY_AQUI'; // Substitua pela sua chave real
+// ===================== Clima (OpenWeather) =====================
+const apiKey = 'INSIRA_SUA_API_KEY_AQUI'; // Substitua pela sua chave da OpenWeather
 
 function fetchWeather() {
   if (!navigator.geolocation) {
