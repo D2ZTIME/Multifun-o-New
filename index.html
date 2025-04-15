@@ -1,65 +1,119 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Relógio Multifuncional</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>D2Z Clock</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #111;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    header {
+      width: 100%;
+      background: #222;
+      padding: 10px 0;
+      text-align: center;
+    }
+
+    nav button {
+      background: #333;
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      margin: 0 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    nav button.active {
+      background: #555;
+    }
+
+    .section {
+      display: none;
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .clock-display {
+      font-size: 80px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Relógio Multifuncional</h1>
-    <nav>
-      <button class="active">Relógio</button>
-      <button>Cronômetro</button>
-      <button>Temporizador</button>
-      <button>Pomodoro</button>
-      <button>Alarme</button>
-      <button>Clima</button>
-    </nav>
-  </header>
 
-  <main>
-    <section class="active">
-      <h2>Relógio Digital</h2>
-      <div id="digital-clock"></div>
-    </section>
+<header>
+  <nav>
+    <button onclick="showSection('clock')" class="active">Relógio</button>
+    <button onclick="showSection('alarm')">Alarme</button>
+    <button onclick="showSection('stopwatch')">Cronômetro</button>
+    <button onclick="showSection('timer')">Timer</button>
+    <button onclick="showSection('pomodoro')">Pomodoro</button>
+    <button onclick="showSection('weather')">Tempo</button>
+  </nav>
+</header>
 
-    <section>
-      <h2>Cronômetro</h2>
-      <div id="stopwatch-display">00:00</div>
-      <button id="start-stopwatch">Iniciar</button>
-      <button id="stop-stopwatch">Parar</button>
-      <button id="reset-stopwatch">Reiniciar</button>
-    </section>
+<main>
+  <section id="clock" class="section active">
+    <div class="clock-display" id="relogio">--:--:--</div>
+  </section>
 
-    <section>
-      <h2>Temporizador</h2>
-      <input type="number" id="timer-minutes" placeholder="Minutos" min="1" />
-      <button id="start-timer">Iniciar</button>
-      <div id="timer-display">00:00</div>
-    </section>
+  <section id="alarm" class="section">
+    <p>⚠️ Em breve: Alarme</p>
+  </section>
 
-    <section>
-      <h2>Pomodoro</h2>
-      <div id="pomodoro-display">25:00</div>
-      <button id="start-pomodoro">Iniciar</button>
-      <button id="reset-pomodoro">Reiniciar</button>
-    </section>
+  <section id="stopwatch" class="section">
+    <p>⏱️ Em breve: Cronômetro</p>
+  </section>
 
-    <section>
-      <h2>Alarme</h2>
-      <input type="time" id="alarm-time" />
-      <button id="set-alarm">Definir Alarme</button>
-      <div id="alarm-status"></div>
-    </section>
+  <section id="timer" class="section">
+    <p>⏳ Em breve: Timer</p>
+  </section>
 
-    <section>
-      <h2>Clima</h2>
-      <div id="weather-info">Buscando clima...</div>
-    </section>
-  </main>
+  <section id="pomodoro" class="section">
+    <p>🍅 Em breve: Pomodoro</p>
+  </section>
 
-  <script src="js/script.js"></script>
+  <section id="weather" class="section">
+    <p>🌤️ Em breve: Previsão do tempo</p>
+  </section>
+</main>
+
+<script>
+  // Relógio digital em tempo real
+  function atualizarRelogio() {
+    const agora = new Date();
+    const horas = agora.getHours().toString().padStart(2, '0');
+    const minutos = agora.getMinutes().toString().padStart(2, '0');
+    const segundos = agora.getSeconds().toString().padStart(2, '0');
+    document.getElementById('relogio').textContent = `${horas}:${minutos}:${segundos}`;
+  }
+  setInterval(atualizarRelogio, 1000);
+  atualizarRelogio();
+
+  // Navegação entre seções
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+  }
+</script>
+
 </body>
 </html>
+
