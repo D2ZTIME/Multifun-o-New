@@ -1,10 +1,11 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>D2ZTime - Multifuncional</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
   <header>
@@ -25,7 +26,7 @@
       <div id="digital-clock">00:00:00</div>
     </section>
 
-    <section id="alarm" style="display: none">
+    <section id="alarm" class="hidden">
       <h2>Alarme</h2>
       <input type="time" id="alarm-time">
       <button id="set-alarm">Definir Alarme</button>
@@ -33,7 +34,7 @@
       <p id="alarm-status"></p>
     </section>
 
-    <section id="stopwatch" style="display: none">
+    <section id="stopwatch" class="hidden">
       <h2>Cronômetro</h2>
       <div id="stopwatch-display">00:00:00</div>
       <button id="start-stopwatch">Iniciar</button>
@@ -41,7 +42,7 @@
       <button id="reset-stopwatch">Zerar</button>
     </section>
 
-    <section id="timer" style="display: none">
+    <section id="timer" class="hidden">
       <h2>Timer</h2>
       <input type="number" id="timer-minutes" placeholder="Minutos">
       <input type="number" id="timer-seconds" placeholder="Segundos">
@@ -51,7 +52,7 @@
       <button id="reset-timer">Resetar</button>
     </section>
 
-    <section id="pomodoro" style="display: none">
+    <section id="pomodoro" class="hidden">
       <h2>Pomodoro</h2>
       <div id="pomodoro-display">25:00</div>
       <button id="start-pomodoro">Iniciar</button>
@@ -59,29 +60,12 @@
       <button id="reset-pomodoro">Resetar</button>
     </section>
 
-    <section id="weather" style="display: none">
+    <section id="weather" class="hidden">
       <h2>Clima Atual</h2>
       <p id="weather-info">Carregando...</p>
     </section>
   </main>
 
-  <script>
-    const buttons = document.querySelectorAll("nav button");
-    const sections = document.querySelectorAll("main section");
-
-    buttons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const target = btn.getAttribute("data-section");
-
-        buttons.forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-
-        sections.forEach((sec) => {
-          sec.style.display = sec.id === target ? "block" : "none";
-        });
-      });
-    });
-  </script>
-  <script src="script.js"></script>
+  <script src="js/script.js"></script>
 </body>
 </html>
