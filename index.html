@@ -1,24 +1,30 @@
+<!-- index.html -->
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>D2Z Clock</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>D2ZTime - Multifuncional</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
   <header>
-    <h1>D2Z Clock</h1>
+    <h1>D2ZTime Multifuncional</h1>
     <nav>
-      <ul>
-        <li><button data-section="clock">Relógio</button></li>
-        <li><button data-section="alarm">Alarme</button></li>
-        <li><button data-<section id="stopwatch">
-  <h2>Cronômetro</h2>
-  <div id="stopwatch-display">00:00:00</div>
-  <button onclick="startStopwatch()">Iniciar</button>
-  <button onclick="pauseStopwatch()">Pausar</button>
-  <button onclick="resetStopwatch()">Zerar</button>
-</section>
+      <button data-section="clock" class="active">Relógio</button>
+      <button data-section="alarm">Alarme</button>
+      <button data-section="stopwatch">Cronômetro</button>
+      <button data-section="timer">Timer</button>
+      <button data-section="pomodoro">Pomodoro</button>
+      <button data-section="weather">Clima</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="clock" class="active">
+      <h2>Relógio Digital</h2>
+      <div id="digital-clock">00:00:00</div>
+    </section>
 ">Cronômetro</button></li>
         <li><button data-section="timer">Timer</button></li>
         <li><button data-section="pomodoro">Pomodoro</button></li>
