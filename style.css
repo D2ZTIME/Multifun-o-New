@@ -14,6 +14,7 @@ body {
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 header {
@@ -55,6 +56,7 @@ main {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s, color 0.3s;
 }
 
 section {
@@ -112,4 +114,43 @@ button:hover {
   margin-top: 15px;
   font-size: 1rem;
   font-style: italic;
+}
+
+/* Dark Mode (auto detect via prefers-color-scheme) */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1e1e1e;
+    color: #f4f4f4;
+  }
+
+  main {
+    background: #2b2b2b;
+  }
+
+  nav button {
+    background-color: #444;
+    color: #ddd;
+  }
+
+  nav button.active,
+  nav button:hover {
+    background-color: #2196F3;
+    color: white;
+  }
+
+  input[type="time"],
+  input[type="number"] {
+    background: #3c3c3c;
+    color: #fff;
+    border: 1px solid #666;
+  }
+
+  button {
+    background-color: #2196F3;
+  }
+
+  #alarm-status,
+  #weather-info {
+    color: #ccc;
+  }
 }
