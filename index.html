@@ -71,77 +71,7 @@
 </body>
 </html>
 
-    function setAlarm() {
-      const time = document.getElementById("alarmTime").value;
-      if (time && !alarms.includes(time)) {
-        alarms.push(time);
-        localStorage.setItem("alarms", JSON.stringify(alarms));
-        renderAlarms();
-      }
-    }
-
-    function renderAlarms() {
-      alarmList.innerHTML = "";
-      alarms.forEach((alarm, index) => {
-        const li = document.createElement("li");
-        li.textContent = alarm;
-        const delBtn = document.createElement("button");
-        delBtn.textContent = "❌";
-        delBtn.onclick = () => removeAlarm(index);
-        li.appendChild(delBtn);
-        alarmList.appendChild(li);
-      });
-    }
-
-    function removeAlarm(index) {
-      alarms.splice(index, 1);
-      localStorage.setItem("alarms", JSON.stringify(alarms));
-      renderAlarms();
-    }
-
-    function checkAlarms(now) {
-      const currentTime = now.toTimeString().slice(0, 5);
-      if (alarms.includes(currentTime)) {
-        alarmSound.play();
-        alert("⏰ Alarme: " + currentTime);
-        alarms = alarms.filter(time => time !== currentTime);
-        localStorage.setItem("alarms", JSON.stringify(alarms));
-        renderAlarms();
-      }
-    }
-
-    renderAlarms();
-
-    // Cronômetro
-    let stopwatchInterval;
-    let stopwatchTime = 0;
-
-    function startStopwatch() {
-      clearInterval(stopwatchInterval);
-      stopwatchInterval = setInterval(() => {
-        stopwatchTime++;
-        updateStopwatchDisplay();
-      }, 1000);
-    }
-
-    function pauseStopwatch() {
-      clearInterval(stopwatchInterval);
-    }
-
-    function resetStopwatch() {
-      clearInterval(stopwatchInterval);
-      stopwatchTime = 0;
-      updateStopwatchDisplay();
-    }
-
-    function updateStopwatchDisplay() {
-      const hours = String(Math.floor(stopwatchTime / 3600)).padStart(2, '0');
-      const minutes = String(Math.floor((stopwatchTime % 3600) / 60)).padStart(2, '0');
-      const seconds = String(stopwatchTime % 60).padStart(2, '0');
-      document.getElementById("stopwatchDisplay").textContent = `${hours}:${minutes}:${seconds}`;
-    }
-
-    // Timer
+      // Timer
     let timerInterval;
     function startTimer() {
       const minutes = parseInt(document.getElementById("timerMinutes").value);
