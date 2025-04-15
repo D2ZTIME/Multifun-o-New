@@ -1,89 +1,115 @@
-body {
-  font-family: Arial, sans-serif;
+/* style.css */
+
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  background: #111;
-  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #f4f4f4;
+  color: #333;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  align-items: center;
+  padding: 20px;
 }
 
 header {
-  background: #222;
-  padding: 1rem;
   text-align: center;
+  margin-bottom: 30px;
 }
 
-nav ul {
-  list-style: none;
-  padding: 0;
+h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+nav {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  justify-content: center;
+  gap: 10px;
 }
 
-nav ul li button {
-  background: #444;
+nav button {
+  padding: 10px 20px;
   border: none;
-  padding: 0.5rem 1rem;
-  color: #fff;
+  background-color: #ddd;
   cursor: pointer;
   border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
-nav ul li button:hover,
-nav ul li button.active {
-  background: #00aaff;
+nav button.active,
+nav button:hover {
+  background-color: #007BFF;
+  color: white;
 }
 
 main {
-  flex: 1;
-  padding: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  width: 100%;
+  max-width: 500px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 section {
   display: none;
-  font-size: 2rem;
 }
 
 section.active {
   display: block;
 }
 
-footer {
-  background: #222;
-  padding: 1rem;
-  text-align: center;
-}
-#digital-clock {
-  font-size: 5rem;
-  font-weight: bold;
-  color: #00ffaa;
-}
-#alarm {
+section h2 {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
   text-align: center;
 }
 
-#alarm-time {
-  padding: 0.5rem;
+#digital-clock,
+#stopwatch-display,
+#timer-display,
+#pomodoro-display {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+input[type="time"],
+input[type="number"] {
+  padding: 10px;
+  margin: 5px;
+  width: calc(50% - 12px);
   font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
-#alarm-status {
-  margin-top: 1rem;
-  color: #ff5555;
-  font-weight: bold;
+button {
+  padding: 10px 15px;
+  margin: 5px;
+  border: none;
+  background-color: #007BFF;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: opacity 0.2s;
 }
-#weather {
+
+button:hover {
+  opacity: 0.9;
+}
+
+#alarm-status,
+#weather-info {
   text-align: center;
-  margin-top: 2rem;
-  font-size: 1.1rem;
+  margin-top: 15px;
+  font-size: 1rem;
+  font-style: italic;
 }
-
-
