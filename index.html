@@ -2,31 +2,36 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Relógio Multifuncional</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
   <header>
     <h1>Relógio Multifuncional</h1>
     <nav>
       <button class="active">Relógio</button>
-      <button>Cronômetro</button>
-      <button>Temporizador</button>
-      <button>Pomodoro</button>
       <button>Alarme</button>
+      <button>Cronômetro</button>
+      <button>Timer</button>
+      <button>Pomodoro</button>
       <button>Clima</button>
     </nav>
   </header>
 
   <main>
-    <!-- Relógio Digital -->
     <section class="active">
       <h2>Relógio Digital</h2>
       <div id="digital-clock">--:--:--</div>
     </section>
 
-    <!-- Cronômetro -->
+    <section>
+      <h2>Alarme</h2>
+      <input type="time" id="alarm-time">
+      <button id="set-alarm">Definir Alarme</button>
+      <div id="alarm-status"></div>
+    </section>
+
     <section>
       <h2>Cronômetro</h2>
       <div id="stopwatch-display">00:00</div>
@@ -35,31 +40,20 @@
       <button id="reset-stopwatch">Resetar</button>
     </section>
 
-    <!-- Temporizador -->
     <section>
-      <h2>Temporizador</h2>
-      <input type="number" id="timer-minutes" placeholder="Minutos">
-      <button id="start-timer">Iniciar</button>
+      <h2>Timer</h2>
+      <input type="number" id="timer-minutes" placeholder="Minutos" />
+      <button id="start-timer">Iniciar Timer</button>
       <div id="timer-display">00:00</div>
     </section>
 
-    <!-- Pomodoro -->
     <section>
       <h2>Pomodoro</h2>
       <div id="pomodoro-display">25:00</div>
-      <button id="start-pomodoro">Iniciar</button>
+      <button id="start-pomodoro">Iniciar Pomodoro</button>
       <button id="reset-pomodoro">Resetar</button>
     </section>
 
-    <!-- Alarme -->
-    <section>
-      <h2>Alarme</h2>
-      <input type="time" id="alarm-time">
-      <button id="set-alarm">Definir Alarme</button>
-      <div id="alarm-status"></div>
-    </section>
-
-    <!-- Clima -->
     <section>
       <h2>Clima Atual</h2>
       <div id="weather-info">Buscando clima...</div>
