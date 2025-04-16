@@ -143,3 +143,56 @@ function fetchWeather() {
 }
 
 fetchWeather();
+function atualizarRelogio() {
+  const agora = new Date();
+  const horas = agora.getHours().toString().padStart(2, '0');
+  const minutos = agora.getMinutes().toString().padStart(2, '0');
+  const segundos = agora.getSeconds().toString().padStart(2, '0');
+  document.getElementById('relogio').textContent = `${horas}:${minutos}:${segundos}`;
+}
+setInterval(atualizarRelogio, 1000);
+let alarmeHora = null;
+
+function definirAlarme() {
+  const horaInput = prompt("Digite a hora do alarme (HH:MM):");
+  if (horaInput) {
+    alarmeHora = horaInput;
+    alert(`Alarme definido para ${alarmeHora}`);
+  }
+}
+
+function verificarAlarme() {
+  const agora = new Date();
+  const horaAtual = `${agora.getHours().toString().padStart(2, '0')}:${agora.getMinutes().toString().padStart(2, '0')}`;
+  if (alarmeHora === horaAtual) {
+    tocarAlarme();
+    alarmeHora = null; // Resetar o alarme após tocar
+  }
+}
+
+function tocarAlarme() {
+  const audio = new Audio('caminho/para/som.mp3');
+  audio.play();
+}
+
+setInterval(verificarAlarme, 60000); // Verifica a cada minuto
+async function obterClima() {
+  const apiKey = 'sua_api_key';
+  const cidade = 'São José do Rio Preto';
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${cidade}&appid=${apiKey}&lang=pt_br&units=metric`;
+
+  try {
+    const resposta = await fetch(url);
+    const dados = await resposta.json();
+    const clima = dados.weather[0].description;
+    const temperatura = dados.main.temp;
+    document.getElementById('clima').textContent = `${cidade}: ${clima}, ${temperatura}°C`;
+  } catch (erro) {
+    console.error('Erro ao obter clima:', erro);
+  }
+}
+
+obterClima();
+setInterval(obterClima, 600000); // Atualiza a cada 10 minutos
+
+
