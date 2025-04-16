@@ -1,0 +1,15 @@
+# D2Z Time - Relógio Multifuncional
+
+Este é um projeto completo com funcionalidades de relógio digital, alarme e clima atualizado com integração da API OpenWeatherMap.
+
+## Como usar
+
+1. Clone ou baixe este repositório.
+2. Adicione sua chave da API do OpenWeatherMap no arquivo `js/script.js`.
+3. Abra `index.html` no navegador.
+
+## Funcionalidades
+
+- ⏱ Relógio em tempo real
+- 🔔 Alarme configurável
+- 🌤 Clima atualizado por localização
