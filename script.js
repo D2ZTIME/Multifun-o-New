@@ -194,5 +194,6 @@ async function obterClima() {
 
 obterClima();
 setInterval(obterClima, 600000); // Atualiza a cada 10 minutos
+// Código das funções atualizarRelogio, definirAlarme, verificarAlarme, tocarAlarme e obterClima conforme descrito acima
 
 
