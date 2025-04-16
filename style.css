@@ -153,3 +153,25 @@ button:hover {
     color: #ccc;
   }
 }
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
+  text-align: center;
+  padding: 20px;
+}
+
+h1 {
+  color: #007BFF;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 5px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+/* Código de estilização conforme descrito acima */
