@@ -1,44 +1,25 @@
-// Relógio Digital
-function atualizarRelogio() {
-  const agora = new Date();
-  const horas = agora.getHours().toString().padStart(2, "0");
-  const minutos = agora.getMinutes().toString().padStart(2, "0");
-  const segundos = agora.getSeconds().toString().padStart(2, "0");
-  document.getElementById("relogio").textContent = `${horas}:${minutos}:${segundos}`;
-}
-setInterval(atualizarRelogio, 1000);
-atualizarRelogio();
+function updateClock() {
+  const now = new Date();
+  const hours = now.getHours().toString().padStart(2, '0');
+  const minutes = now.getMinutes().toString().padStart(2, '0');
+  const seconds = now.getSeconds().toString().padStart(2, '0');
+  const ampm = hours >= 12 ? 'PM' : 'AM';
 
-// Alarme
-let alarmeHora = null;
+  document.getElementById('hours').textContent = hours;
+  document.getElementById('minutes').textContent = minutes;
+  document.getElementById('seconds').textContent = seconds;
+  document.getElementById('ampm').textContent = ampm;
 
-function definirAlarme() {
-  const input = prompt("Digite a hora do alarme (HH:MM):");
-  if (/^\d{2}:\d{2}$/.test(input)) {
-    alarmeHora = input;
-    document.getElementById("alarmeStatus").textContent = `⏰ Alarme definido para ${alarmeHora}`;
-  } else {
-    alert("Formato inválido. Use HH:MM.");
-  }
+  // Atualizar data
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  document.getElementById('date').textContent = now.toLocaleDateString('pt-BR', options);
 }
 
-function verificarAlarme() {
-  if (!alarmeHora) return;
-  const agora = new Date();
-  const horaAtual = `${agora.getHours().toString().padStart(2, "0")}:${agora.getMinutes().toString().padStart(2, "0")}`;
-  if (horaAtual === alarmeHora) {
-    alarmeHora = null;
-    document.getElementById("alarmeStatus").textContent = "🔔 Alarme tocado!";
-    tocarAlarme();
-  }
-}
-setInterval(verificarAlarme, 1000);
+// Tema escuro/claro
+document.getElementById('theme-toggle').addEventListener('click', () => {
+  document.body.classList.toggle('dark');
+});
 
-function tocarAlarme() {
-  const som = new Audio("assets/alarme.mp3");
-  som.play();
-}
-
-// Clima (sem API por enquanto)
-document.getElementById("clima").textContent = "🌤 Exemplo: 25°C, ensolarado";
-// ou use a API se quiser: https://openweathermap.org/api
+// Atualizar a cada segundo
+setInterval(updateClock, 1000);
+updateClock(); // Iniciar imediatamente
