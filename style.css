@@ -56,3 +56,52 @@ body.dark .date {
     font-size: 3rem;
   }
 }
+
+/* Cronômetro */
+.stopwatch-container {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.stopwatch {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.stopwatch-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.stopwatch-controls button {
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#start-sw {
+  background: #4CAF50;
+  color: white;
+}
+
+#stop-sw {
+  background: #f44336;
+  color: white;
+}
+
+#reset-sw {
+  background: #2196F3;
+  color: white;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .stopwatch {
+    font-size: 2rem;
+  }
+}
