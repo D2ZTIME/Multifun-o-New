@@ -115,3 +115,13 @@ function addLap() {
 
 // Carregue as voltas ao iniciar
 document.addEventListener('DOMContentLoaded', loadLaps);
+<!-- Adicione no <body> -->
+<audio id="click-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-modern-click-box-check-1120.mp3" preload="auto"></audio>
+
+<!-- Substitua os botões existentes por: -->
+<div class="stopwatch-controls">
+  <button id="start-sw" class="btn-3d">▶ Iniciar</button>
+  <button id="stop-sw" class="btn-3d">⏸ Parar</button>
+  <button id="reset-sw" class="btn-3d">⏹ Zerar</button>
+  <button id="lap-sw" class="btn-3d">⏱ Volta</button>
+</div>
