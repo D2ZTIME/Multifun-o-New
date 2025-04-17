@@ -71,3 +71,47 @@ lapBtn.addEventListener('click', () => {
 
 // Inicializa
 updateStopwatch();
+// Sons de clique
+const clickSound = document.getElementById('click-sound');
+
+function playClickSound() {
+  clickSound.currentTime = 0;
+  clickSound.play();
+}
+
+// Salvar/Carregar voltas do localStorage
+function saveLaps() {
+  const laps = Array.from(document.querySelectorAll('.lap-item')).map(lap => lap.textContent);
+  localStorage.setItem('stopwatchLaps', JSON.stringify(laps));
+  localStorage.setItem('lapCount', lapCount.toString());
+}
+
+function loadLaps() {
+  const savedLaps = JSON.parse(localStorage.getItem('stopwatchLaps')) || [];
+  const savedLapCount = parseInt(localStorage.getItem('lapCount')) || 1;
+  
+  lapCount = savedLapCount;
+  savedLaps.forEach(lapText => {
+    const lapItem = document.createElement('div');
+    lapItem.className = 'lap-item';
+    lapItem.textContent = lapText;
+    lapsContainer.prepend(lapItem);
+  });
+}
+
+// Modifique o addLap() para salvar automaticamente
+function addLap() {
+  const lapItem = document.createElement('div');
+  lapItem.className = 'lap-item';
+  lapItem.textContent = `Volta ${lapCount++}: ${swMinutes.textContent}:${swSeconds.textContent}.${swMilliseconds.textContent}`;
+  lapsContainer.prepend(lapItem);
+  saveLaps();
+}
+
+// Atualize os event listeners para tocar som
+[startBtn, stopBtn, resetBtn, lapBtn].forEach(btn => {
+  btn.addEventListener('click', () => playClickSound());
+});
+
+// Carregue as voltas ao iniciar
+document.addEventListener('DOMContentLoaded', loadLaps);
