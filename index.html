@@ -1,32 +1,29 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>D2Z Time - Relógio Multifuncional</title>
-  <link rel="stylesheet" href="css/estilo.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relógio Online</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Relógio Multifuncional</h1>
-
-    <div class="modulo">
-      <h2>Relógio Digital</h2>
-      <div id="relogio" class="visor">--:--:--</div>
+  <div class="clock-container">
+    <div class="clock">
+      <span id="hours">00</span>
+      <span class="separator">:</span>
+      <span id="minutes">00</span>
+      <span class="separator">:</span>
+      <span id="seconds">00</span>
+      <span id="ampm">PM</span>
     </div>
-
-    <div class="modulo">
-      <h2>Alarme</h2>
-      <button onclick="definirAlarme()">⏰ Definir Alarme</button>
-      <div id="alarmeStatus">Nenhum alarme definido</div>
-    </div>
-
-    <div class="modulo">
-      <h2>Clima Atual</h2>
-      <div id="clima">Buscando clima...</div>
-    </div>
+    <div class="date" id="date">Sexta-feira, 12 de Janeiro 2024</div>
   </div>
 
-  <script src="js/script.js"></script>
+  <!-- Futuros botôes para extras (cronômetro, alarme) -->
+  <div class="controls">
+    <button id="theme-toggle">Tema Escuro</button>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
