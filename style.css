@@ -105,3 +105,65 @@ body.dark .date {
     font-size: 2rem;
   }
 }
+/* Cronômetro (centralizado abaixo da data) */
+.stopwatch-container {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.stopwatch {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+  margin: 0.5rem 0;
+}
+
+.stopwatch-controls {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.stopwatch-controls button {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.stopwatch-controls button:hover {
+  opacity: 0.8;
+}
+
+#start-sw { background: #4CAF50; color: white; }
+#stop-sw { background: #f44336; color: white; }
+#reset-sw { background: #2196F3; color: white; }
+#lap-sw { background: #FFC107; color: #333; }
+
+/* Lista de voltas */
+.laps {
+  max-height: 150px;
+  overflow-y: auto;
+  margin-top: 1rem;
+  border-top: 1px solid #ddd;
+  padding-top: 1rem;
+}
+
+.lap-item {
+  padding: 0.5rem;
+  border-bottom: 1px solid #eee;
+  font-family: monospace;
+}
+
+/* Tema escuro */
+body.dark .stopwatch,
+body.dark .lap-item {
+  color: #fff;
+}
+
+body.dark .laps {
+  border-color: #444;
+}
