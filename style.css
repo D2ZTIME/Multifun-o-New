@@ -167,3 +167,36 @@ body.dark .lap-item {
 body.dark .laps {
   border-color: #444;
 }
+/* Botões 3D */
+.btn-3d {
+  position: relative;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: white;
+  box-shadow: 
+    0 4px 0 rgba(0, 0, 0, 0.2),
+    0 5px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.1s ease;
+}
+
+.btn-3d:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+#start-sw { background: #4CAF50; }
+#stop-sw { background: #f44336; }
+#reset-sw { background: #2196F3; }
+#lap-sw { background: #FFC107; color: #333; }
+
+/* Efeito flutuante */
+.btn-3d:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 0 rgba(0, 0, 0, 0.2),
+    0 8px 15px rgba(0, 0, 0, 0.2);
+}
