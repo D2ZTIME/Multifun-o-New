@@ -1,43 +1,58 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f8ff;
+  font-family: 'Arial', sans-serif;
+  background: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   margin: 0;
-  padding: 20px;
+  transition: background 0.3s;
+}
+
+.clock-container {
   text-align: center;
 }
 
-.container {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-h1 {
+.clock {
+  font-size: 5rem;
+  font-weight: bold;
   color: #333;
 }
 
-.modulo {
-  margin-top: 30px;
-  padding: 20px;
-  background: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.separator {
+  margin: 0 0.5rem;
 }
 
-.visor {
-  font-size: 2.5em;
-  margin-top: 10px;
+.date {
+  font-size: 1.5rem;
+  color: #666;
+  margin-top: 1rem;
+}
+
+.controls {
+  margin-top: 2rem;
 }
 
 button {
-  padding: 10px 20px;
-  font-size: 1em;
-  background: #00796b;
-  color: white;
-  border: none;
-  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
   cursor: pointer;
 }
 
-button:hover {
-  background: #004d40;
+/* Tema escuro */
+body.dark {
+  background: #222;
+  color: #fff;
+}
+
+body.dark .clock,
+body.dark .date {
+  color: #fff;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .clock {
+    font-size: 3rem;
+  }
 }
