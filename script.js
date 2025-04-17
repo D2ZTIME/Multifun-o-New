@@ -1,44 +1,22 @@
-function updateClock() {
-  const now = new Date();
-  const hours = now.getHours().toString().padStart(2, '0');
-  const minutes = now.getMinutes().toString().padStart(2, '0');
-  const seconds = now.getSeconds().toString().padStart(2, '0');
-  const ampm = hours >= 12 ? 'PM' : 'AM';
-
-  document.getElementById('hours').textContent = hours;
-  document.getElementById('minutes').textContent = minutes;
-  document.getElementById('seconds').textContent = seconds;
-  document.getElementById('ampm').textContent = ampm;
-
-  // Atualizar data
-  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  document.getElementById('date').textContent = now.toLocaleDateString('pt-BR', options);
-}
-
-// Tema escuro/claro
-document.getElementById('theme-toggle').addEventListener('click', () => {
-  document.body.classList.toggle('dark');
-});
-
-// Atualizar a cada segundo
-setInterval(updateClock, 1000);
-updateClock(); // Iniciar imediatamente
 // Variáveis do cronômetro
 let swInterval;
-let swStartTime;
+let swStartTime = 0;
 let swElapsedTime = 0;
 let swRunning = false;
+let lapCount = 1;
 
-// Elementos do cronômetro
+// Elementos
 const swMinutes = document.getElementById('sw-minutes');
 const swSeconds = document.getElementById('sw-seconds');
 const swMilliseconds = document.getElementById('sw-milliseconds');
 const startBtn = document.getElementById('start-sw');
 const stopBtn = document.getElementById('stop-sw');
 const resetBtn = document.getElementById('reset-sw');
+const lapBtn = document.getElementById('lap-sw');
+const lapsContainer = document.getElementById('laps-container');
 
-// Atualizar display do cronômetro
-function updateStopwatchDisplay() {
+// Atualiza o display
+function updateStopwatch() {
   const totalMs = swElapsedTime;
   const minutes = Math.floor(totalMs / 60000).toString().padStart(2, '0');
   const seconds = Math.floor((totalMs % 60000) / 1000).toString().padStart(2, '0');
@@ -49,13 +27,21 @@ function updateStopwatchDisplay() {
   swMilliseconds.textContent = milliseconds;
 }
 
-// Event listeners
+// Adiciona uma volta
+function addLap() {
+  const lapItem = document.createElement('div');
+  lapItem.className = 'lap-item';
+  lapItem.textContent = `Volta ${lapCount++}: ${swMinutes.textContent}:${swSeconds.textContent}.${swMilliseconds.textContent}`;
+  lapsContainer.prepend(lapItem);
+}
+
+// Event Listeners
 startBtn.addEventListener('click', () => {
   if (!swRunning) {
     swStartTime = Date.now() - swElapsedTime;
     swInterval = setInterval(() => {
       swElapsedTime = Date.now() - swStartTime;
-      updateStopwatchDisplay();
+      updateStopwatch();
     }, 10);
     swRunning = true;
   }
@@ -72,8 +58,16 @@ resetBtn.addEventListener('click', () => {
   clearInterval(swInterval);
   swRunning = false;
   swElapsedTime = 0;
-  updateStopwatchDisplay();
+  lapCount = 1;
+  lapsContainer.innerHTML = '';
+  updateStopwatch();
 });
 
-// Inicializar display
-updateStopwatchDisplay();
+lapBtn.addEventListener('click', () => {
+  if (swRunning) {
+    addLap();
+  }
+});
+
+// Inicializa
+updateStopwatch();
