@@ -83,13 +83,6 @@ section h2 {
   font-weight: bold;
 }
 
-/* Aumentar tamanho da fonte do cronômetro */
-.stopwatch {
-  font-size: 18rem;
-  text-align: center;
-  font-weight: bold;
-}
-
 input[type="time"],
 input[type="number"] {
   padding: 10px;
@@ -123,7 +116,15 @@ button:hover {
   font-style: italic;
 }
 
-/* Dark Mode (auto detect via prefers-color-scheme) */
+/* Cronômetro com fonte maior */
+.stopwatch-container .stopwatch {
+  font-size: 200%;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Dark Mode */
 @media (prefers-color-scheme: dark) {
   body {
     background-color: #1e1e1e;
@@ -161,3 +162,75 @@ button:hover {
     color: #ccc;
   }
 }
+
+/* script.js */
+
+// Tabs
+const navButtons = document.querySelectorAll('nav button');
+const sections = document.querySelectorAll('main section');
+
+navButtons.forEach((button, index) => {
+  button.addEventListener('click', () => {
+    navButtons.forEach(btn => btn.classList.remove('active'));
+    sections.forEach(sec => sec.classList.remove('active'));
+
+    button.classList.add('active');
+    sections[index].classList.add('active');
+  });
+});
+
+// Digital Clock
+function updateDigitalClock() {
+  const now = new Date();
+  const clock = document.getElementById('digital-clock');
+  if (clock) clock.textContent = now.toLocaleTimeString();
+}
+setInterval(updateDigitalClock, 1000);
+updateDigitalClock();
+
+// Stopwatch
+let stopwatchInterval;
+let swMinutes = 0, swSeconds = 0, swMilliseconds = 0;
+
+function updateStopwatchDisplay() {
+  document.getElementById('sw-minutes').textContent = swMinutes.toString().padStart(2, '0');
+  document.getElementById('sw-seconds').textContent = swSeconds.toString().padStart(2, '0');
+  document.getElementById('sw-milliseconds').textContent = swMilliseconds.toString().padStart(2, '0');
+}
+
+document.getElementById('start-sw').addEventListener('click', () => {
+  clearInterval(stopwatchInterval);
+  stopwatchInterval = setInterval(() => {
+    swMilliseconds++;
+    if (swMilliseconds >= 100) {
+      swMilliseconds = 0;
+      swSeconds++;
+    }
+    if (swSeconds >= 60) {
+      swSeconds = 0;
+      swMinutes++;
+    }
+    updateStopwatchDisplay();
+  }, 10);
+});
+
+document.getElementById('stop-sw').addEventListener('click', () => {
+  clearInterval(stopwatchInterval);
+});
+
+document.getElementById('reset-sw').addEventListener('click', () => {
+  clearInterval(stopwatchInterval);
+  swMinutes = 0;
+  swSeconds = 0;
+  swMilliseconds = 0;
+  updateStopwatchDisplay();
+});
+
+document.getElementById('lap-sw').addEventListener('click', () => {
+  const lapTime = `${swMinutes.toString().padStart(2, '0')}:${swSeconds.toString().padStart(2, '0')}:${swMilliseconds.toString().padStart(2, '0')}`;
+  const lapElement = document.createElement('div');
+  lapElement.textContent = `Volta: ${lapTime}`;
+  document.getElementById('laps-container').appendChild(lapElement);
+});
+
+updateStopwatchDisplay();
