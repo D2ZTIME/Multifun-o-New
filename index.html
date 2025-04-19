@@ -3,57 +3,64 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>D2Z Clock</title>
+  <title>Relógio Digital</title>
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <div class="app">
+  <div class="container">
     <aside class="sidebar">
-      <button class="menu-btn active" data-section="clock">🕒 Relógio</button>
-      <button class="menu-btn" data-section="alarm">⏰ Alarme</button>
-      <button class="menu-btn" data-section="stopwatch">⏱ Cronômetro</button>
-      <button class="menu-btn" data-section="timer">⏳ Timer</button>
-      <button class="menu-btn" data-section="pomodoro">🍅 Pomodoro</button>
-      <button class="menu-btn" data-section="weather">🌤 Tempo</button>
+      <div class="logo">⏱️</div>
+      <nav>
+        <button class="nav-btn active" data-section="clock"><span>🕒</span> Relógio</button>
+        <button class="nav-btn" data-section="alarm"><span>⏰</span> Alarme</button>
+        <button class="nav-btn" data-section="stopwatch"><span>⏱️</span> Cronômetro</button>
+        <button class="nav-btn" data-section="timer"><span>⏳</span> Timer</button>
+        <button class="nav-btn" data-section="pomodoro"><span>🍅</span> Pomodoro</button>
+        <button class="nav-btn" data-section="weather"><span>🌦️</span> Tempo</button>
+      </nav>
     </aside>
-    <aside class="sidebar">
-  <button class="menu-btn active" data-section="clock">🕒 Relógio</button>
-  <button class="menu-btn" data-section="alarm">⏰ Alarme</button>
-  <button class="menu-btn" data-section="stopwatch">⏱ Cronômetro</button>
-  <button class="menu-btn" data-section="timer">⏳ Timer</button>
-  <button class="menu-btn" data-section="pomodoro">🍅 Pomodoro</button>
-  <button class="menu-btn" data-section="weather">🌤 Tempo</button>
-</aside>
     <main class="content">
-      <section id="clock-section" class="section active">
-        <div id="clock" class="clock">00:00:00</div>
-        <div id="date" class="date">Segunda-feira, 1 de Janeiro de 2025</div>
+      <section id="clock" class="section active">
+        <h1 id="clock-time">00:00:00</h1>
+        <p id="clock-date">Data</p>
       </section>
 
-      <section id="alarm-section" class="section">
+      <section id="alarm" class="section">
         <h2>Configurar Alarme</h2>
         <input type="time" id="alarm-time">
-        <button id="set-alarm">Definir Alarme</button>
+        <button onclick="setAlarm()">Definir Alarme</button>
+        <p id="alarm-status"></p>
       </section>
 
-      <section id="stopwatch-section" class="section">
+      <section id="stopwatch" class="section">
         <h2>Cronômetro</h2>
-        <div id="stopwatch-display" style="font-size: 3rem; margin: 1rem 0;">00:00</div>
-        <button id="start-stopwatch">Iniciar</button>
-        <button id="pause-stopwatch">Pausar</button>
-        <button id="reset-stopwatch">Resetar</button>
+        <div id="stopwatch-display">00:00</div>
+        <div class="controls">
+          <button onclick="startStopwatch()">Iniciar</button>
+          <button onclick="pauseStopwatch()">Pausar</button>
+          <button onclick="resetStopwatch()">Resetar</button>
+        </div>
       </section>
 
-      <section id="timer-section" class="section">Timer (em breve)</section>
+      <section id="timer" class="section">
+        <h2>Timer</h2>
+        <p>(Em breve)</p>
+      </section>
 
-      <section id="pomodoro-section" class="section">
+      <section id="pomodoro" class="section">
         <h2>Pomodoro</h2>
-        <div id="pomodoro-display" style="font-size: 3rem; margin: 1rem 0;">25:00</div>
-        <button id="start-pomodoro">Iniciar Pomodoro</button>
-        <button id="reset-pomodoro">Resetar</button>
+        <div id="pomodoro-display">25:00</div>
+        <div class="controls">
+          <button onclick="startPomodoro()">Iniciar Pomodoro</button>
+          <button onclick="resetPomodoro()">Resetar</button>
+        </div>
       </section>
 
-      <section id="weather-section" class="section">Tempo (em breve)</section>
+      <section id="weather" class="section">
+        <h2>Tempo</h2>
+        <p>(Em breve)</p>
+      </section>
     </main>
   </div>
 
