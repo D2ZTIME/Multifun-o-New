@@ -6,17 +6,9 @@
 }
 
 body {
-  background: var(--bg-dark);
-  color: var(--text-primary);
-  background-image: 
-    radial-gradient(circle at 15% 50%, 
-      rgba(74, 137, 220, 0.1) 0%, 
-      transparent 25%),
-    linear-gradient(to bottom, 
-      var(--bg-dark) 0%, 
-      var(--bg-darker) 100%);
+  background-color: #333333; /* Cinza escuro neutro */
+  color: #f0f0f0; /* Branco levemente suavizado */
 }
-
 .app {
   display: flex;
   width: 100%;
