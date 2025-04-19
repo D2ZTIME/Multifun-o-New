@@ -6,21 +6,21 @@
 }
 
 body {
-  background-color: #2d2d2d; /* Cinza escuro principal */
-  color: #f0f0f0; /* Texto claro para contraste */
+  background-color: #121212; /* Preto profundo */
+  color: #e0e0e0; /* Cinza claro para texto */
   height: 100vh;
   display: flex;
+  transition: background 0.3s ease; /* Transição suave */
 }
 
 .app {
   display: flex;
   width: 100%;
-  background-color: #3a3a3a; /* Fundo ligeiramente mais claro */
 }
 
 .sidebar {
   width: 200px;
-  background: #252525; /* Cinza mais escuro para a sidebar */
+  background: #1e1e1e; /* Preto mais claro */
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0,0,0,0.3);
 }
@@ -31,7 +31,7 @@ body {
   padding: 12px;
   margin-bottom: 10px;
   border: none;
-  background: #333333; /* Fundo dos botões */
+  background: #2d2d2d; /* Fundo dos botões */
   color: #e0e0e0; /* Texto claro */
   text-align: left;
   cursor: pointer;
@@ -40,13 +40,15 @@ body {
 }
 
 .menu-btn:hover {
-  background: #3d3d3d; /* Tom mais claro no hover */
+  background: #3a3a3a; /* Hover mais claro */
+  transform: translateX(3px); /* Efeito de movimento */
 }
 
 .menu-btn.active {
-  background: #4a6fa5;
+  background: #4a6fa5; /* Azul para item ativo */
   color: white;
-  font-weight: 500;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(74, 111, 165, 0.5);
 }
 
 .content {
@@ -55,32 +57,41 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #363636; /* Fundo do conteúdo */
+  background: #121212; /* Fundo preto */
 }
 
 .section {
   display: none;
   text-align: center;
-  background-color: #3a3a3a; /* Fundo das seções */
+  background: #1e1e1e; /* Fundo das seções */
   padding: 30px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  width: 90%;
+  max-width: 600px;
 }
 
 .section.active {
   display: block;
+  animation: fadeIn 0.5s ease; /* Animação de entrada */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 #clock {
   font-size: 4rem;
   font-weight: bold;
   margin-bottom: 10px;
-  color: #ffffff; /* Branco puro para o relógio */
+  color: #ffffff; /* Branco puro */
+  text-shadow: 0 0 10px rgba(255,255,255,0.1);
 }
 
 #date {
   font-size: 1.5rem;
-  color: #aaaaaa; /* Cinza claro para a data */
+  color: #a0a0a0; /* Cinza mais suave */
 }
 
 button {
@@ -91,34 +102,44 @@ button {
   background: #4a6fa5;
   color: white;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.2s;
 }
 
 button:hover {
-  background: #3a5a8a; /* Tom mais escuro no hover */
+  background: #3a5a8a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+button:active {
+  transform: translateY(0);
 }
 
 input {
   padding: 10px;
   margin: 10px;
-  border: 1px solid #555555;
+  border: 1px solid #333;
   border-radius: 5px;
-  background-color: #444444;
-  color: #ffffff;
-}
-
-/* Melhorias adicionais */
-#stopwatch-display,
-#timer-display,
-#pomodoro-display {
-  font-family: 'Courier New', monospace; /* Fonte monoespaçada para displays */
-  font-size: 3rem;
-  color: #4a6fa5; /* Cor azul para os displays */
-  margin: 20px 0;
+  background: #2d2d2d;
+  color: white;
+  transition: border 0.3s;
 }
 
 input:focus {
-  outline: none;
   border-color: #4a6fa5;
-  box-shadow: 0 0 0 2px rgba(74, 111, 165, 0.3);
+  outline: none;
+}
+
+/* Barra de rolagem personalizada */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4a6fa5;
+  border-radius: 4px;
 }
