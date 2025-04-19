@@ -143,3 +143,15 @@ input:focus {
   background: #4a6fa5;
   border-radius: 4px;
 }
+.stopwatch-display {
+  font-size: 24px; /* Tamanho aumentado */
+  font-family: 'Courier New', monospace; /* Fonte monoespaçada */
+  letter-spacing: 1px;
+  color: #4a6fa5; /* Cor azul para destaque */
+  margin: 15px 0;
+}
+
+.milliseconds {
+  font-size: 18px;
+  color: #a0a0a0; /* Cor mais suave para ms */
+}
