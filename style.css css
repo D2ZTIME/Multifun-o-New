@@ -88,4 +88,25 @@ h2 {
 
 input, select, button {
   font-size: 16px;
-  padding: 8px
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+button {
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background-color: #e0e0e0;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
