@@ -32,7 +32,6 @@ menuButtons.forEach(button => {
   });
 });
 
-
 // === ALARME ===
 let alarmTime = null;
 
@@ -59,6 +58,7 @@ function updateStopwatchDisplay() {
 }
 
 document.getElementById('start-stopwatch').addEventListener('click', () => {
+  clearInterval(stopwatchInterval);
   stopwatchInterval = setInterval(() => {
     stopwatchTime++;
     updateStopwatchDisplay();
