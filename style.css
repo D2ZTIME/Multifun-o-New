@@ -153,5 +153,5 @@ input:focus {
 
 .milliseconds {
   font-size: 35px;
-  color: #a0a0a0; /* Cor mais suave para ms */
+  color: #4a6fa5; /* Cor azul para destaque */
 }
