@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>D2Z Clock</title>
+  <title>Relógio Multifuncional</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,8 +19,8 @@
     <main class="content">
       <!-- Relógio -->
       <section id="clock-section" class="section active">
-        <div id="clock" class="clock">00:00:00</div>
-        <div id="date" class="date">Segunda-feira, 1 de Janeiro de 2025</div>
+        <div id="clock">00:00:00</div>
+        <div id="date">Carregando...</div>
       </section>
 
       <!-- Alarme -->
@@ -39,19 +39,27 @@
           <button id="start-stopwatch">▶ Iniciar</button>
           <button id="pause-stopwatch">⏸ Pausar</button>
           <button id="reset-stopwatch">⏹ Resetar</button>
-          <button id="lap-stopwatch">⏱ Volta</button>
         </div>
-        <div id="laps-container"></div>
       </section>
 
       <!-- Timer -->
       <section id="timer-section" class="section">
         <h2>Timer</h2>
-        <input type="number" id="timer-minutes" min="1" max="120" placeholder="Minutos">
-        <button id="start-timer">Iniciar Timer</button>
-        <div id="timer-display">00:00</div>
+        <input type="number" id="timer-minutes" min="1" value="5">
+        <button id="start-timer">Iniciar</button>
+        <div id="timer-display">05:00</div>
       </section>
 
       <!-- Pomodoro -->
       <section id="pomodoro-section" class="section">
-        <h2>Pomodoro</h
+        <h2>Pomodoro</h2>
+        <div id="pomodoro-display">25:00</div>
+        <button id="start-pomodoro">Iniciar</button>
+        <button id="reset-pomodoro">Resetar</button>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
