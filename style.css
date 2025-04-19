@@ -11,31 +11,29 @@ body {
 }
 
 .sidebar {
-  background-color: #2d2d2d; /* Cinza escuro moderno */
-  background: linear-gradient(to bottom, #3a3a3a 0%, #2b2b2b 100%); /* Degradê sutil */
-  border-right: 1px solid #1e1e1e; /* Borda mais escura */
+  background: var(--bg-darker);
+  border-right: 1px solid #333;
 }
 
 .menu-btn {
-  color: #e0e0e0; /* Texto claro */
-  background: transparent;
-  transition: all 0.3s ease;
-  border-left: 3px solid transparent;
-}
-
-.menu-btn:hover {
-  background-color: #3a3a3a; /* Cinza mais claro no hover */
-  border-left: 3px solid #4a6fa5; /* Destaque azul na borda esquerda */
+  color: var(--text-light);
 }
 
 .menu-btn.active {
-  background-color: #1e1e1e !important; /* Fundo mais escuro */
-  color: #ffffff !important;
-  font-weight: 500;
-  border-left: 3px solid #4a6fa5; /* Borda azul */
-  box-shadow: inset 3px 0 10px rgba(0,0,0,0.2);
+  background: var(--accent-color);
 }
 
+button {
+  background: var(--accent-color);
+  color: white;
+}
+
+input {
+  background: #333;
+  color: white;
+  border-color: #555;
+}
 body {
   transition: background 0.5s ease;
 }
+
