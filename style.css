@@ -1,1 +1,73 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
 
+body {
+  background-color: #f4f4f4;
+  color: #111;
+  height: 100vh;
+  display: flex;
+}
+
+.app {
+  display: flex;
+  width: 100%;
+}
+
+.sidebar {
+  width: 220px;
+  background-color: #fff;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.menu-btn {
+  padding: 1rem;
+  font-size: 1.1rem;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.menu-btn:hover, .menu-btn.active {
+  background-color: #e0e0e0;
+}
+
+.content {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.section {
+  display: none;
+  width: 100%;
+  text-align: center;
+}
+
+.section.active {
+  display: block;
+}
+
+.clock {
+  font-size: 5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.date {
+  font-size: 1.5rem;
+  color: #555;
+}
