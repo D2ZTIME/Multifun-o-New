@@ -89,3 +89,38 @@ input {
   border: 1px solid #ddd;
   border-radius: 5px;
 }
+:root {
+  --bg-dark: #121212;
+  --bg-darker: #000000;
+  --text-light: #e0e0e0;
+  --accent-color: #4a6fa5;
+}
+
+body {
+  background: var(--bg-dark);
+  color: var(--text-light);
+}
+
+.sidebar {
+  background: var(--bg-darker);
+  border-right: 1px solid #333;
+}
+
+.menu-btn {
+  color: var(--text-light);
+}
+
+.menu-btn.active {
+  background: var(--accent-color);
+}
+
+button {
+  background: var(--accent-color);
+  color: white;
+}
+
+input {
+  background: #333;
+  color: white;
+  border-color: #555;
+}
