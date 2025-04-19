@@ -143,3 +143,7 @@ function fetchWeather() {
 }
 
 fetchWeather();
+document.getElementById('meuBotao').addEventListener('click', function() {
+  // Ação a ser executada
+});
+
