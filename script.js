@@ -1,215 +1,145 @@
-// Variáveis do cronômetro
-let swInterval;
-let swStartTime = 0;
-let swElapsedTime = 0;
-let swRunning = false;
-let lapCount = 1;
+// ===================== Navegação por abas =====================
+const navButtons = document.querySelectorAll('nav button');
+const sections = document.querySelectorAll('main section');
 
-// Elementos
-const swMinutes = document.getElementById('sw-minutes');
-const swSeconds = document.getElementById('sw-seconds');
-const swMilliseconds = document.getElementById('sw-milliseconds');
-const startBtn = document.getElementById('start-sw');
-const stopBtn = document.getElementById('stop-sw');
-const resetBtn = document.getElementById('reset-sw');
-const lapBtn = document.getElementById('lap-sw');
-const lapsContainer = document.getElementById('laps-container');
+navButtons.forEach((button, index) => {
+  button.addEventListener('click', () => {
+    navButtons.forEach(btn => btn.classList.remove('active'));
+    sections.forEach(sec => sec.classList.remove('active'));
+    button.classList.add('active');
+    sections[index].classList.add('active');
+  });
+});
 
-// Atualiza o display
+// ===================== Relógio Digital =====================
+function updateDigitalClock() {
+  const now = new Date();
+  const clock = document.getElementById('digital-clock');
+  clock.textContent = now.toLocaleTimeString();
+}
+setInterval(updateDigitalClock, 1000);
+updateDigitalClock();
+
+// ===================== Alarme =====================
+let alarmTime = null;
+const alarmAudio = new Audio('https://www.soundjay.com/button/beep-07.wav');
+
+document.getElementById('set-alarm').addEventListener('click', () => {
+  alarmTime = document.getElementById('alarm-time').value;
+  document.getElementById('alarm-status').textContent = `Alarme definido para ${alarmTime}`;
+});
+
+setInterval(() => {
+  const now = new Date();
+  const currentTime = now.toTimeString().slice(0, 5);
+  if (alarmTime === currentTime) {
+    alarmAudio.play();
+    document.getElementById('alarm-status').textContent = '⏰ Alarme disparado!';
+    alarmTime = null;
+  }
+}, 1000);
+
+// ===================== Cronômetro =====================
+let stopwatchInterval;
+let stopwatchTime = 0;
+
 function updateStopwatch() {
-  const totalMs = swElapsedTime;
-  const minutes = Math.floor(totalMs / 60000).toString().padStart(2, '0');
-  const seconds = Math.floor((totalMs % 60000) / 1000).toString().padStart(2, '0');
-  const milliseconds = Math.floor((totalMs % 1000) / 10).toString().padStart(2, '0');
-
-  swMinutes.textContent = minutes;
-  swSeconds.textContent = seconds;
-  swMilliseconds.textContent = milliseconds;
+  const minutes = Math.floor(stopwatchTime / 60).toString().padStart(2, '0');
+  const seconds = (stopwatchTime % 60).toString().padStart(2, '0');
+  document.getElementById('stopwatch-display').textContent = `${minutes}:${seconds}`;
 }
 
-// Adiciona uma volta
-function addLap() {
-  const lapItem = document.createElement('div');
-  lapItem.className = 'lap-item';
-  lapItem.textContent = `Volta ${lapCount++}: ${swMinutes.textContent}:${swSeconds.textContent}.${swMilliseconds.textContent}`;
-  lapsContainer.prepend(lapItem);
-}
-
-// Event Listeners
-startBtn.addEventListener('click', () => {
-  if (!swRunning) {
-    swStartTime = Date.now() - swElapsedTime;
-    swInterval = setInterval(() => {
-      swElapsedTime = Date.now() - swStartTime;
-      updateStopwatch();
-    }, 10);
-    swRunning = true;
-  }
+document.getElementById('start-stopwatch').addEventListener('click', () => {
+  clearInterval(stopwatchInterval);
+  stopwatchInterval = setInterval(() => {
+    stopwatchTime++;
+    updateStopwatch();
+  }, 1000);
 });
 
-stopBtn.addEventListener('click', () => {
-  if (swRunning) {
-    clearInterval(swInterval);
-    swRunning = false;
-  }
+document.getElementById('stop-stopwatch').addEventListener('click', () => {
+  clearInterval(stopwatchInterval);
 });
 
-resetBtn.addEventListener('click', () => {
-  clearInterval(swInterval);
-  swRunning = false;
-  swElapsedTime = 0;
-  lapCount = 1;
-  lapsContainer.innerHTML = '';
+document.getElementById('reset-stopwatch').addEventListener('click', () => {
+  clearInterval(stopwatchInterval);
+  stopwatchTime = 0;
   updateStopwatch();
 });
 
-lapBtn.addEventListener('click', () => {
-  if (swRunning) {
-    addLap();
-  }
+// ===================== Temporizador =====================
+let timerInterval;
+
+document.getElementById('start-timer').addEventListener('click', () => {
+  let time = parseInt(document.getElementById('timer-minutes').value) * 60;
+  if (isNaN(time) || time <= 0) return;
+
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    if (time > 0) {
+      time--;
+      const minutes = Math.floor(time / 60).toString().padStart(2, '0');
+      const seconds = (time % 60).toString().padStart(2, '0');
+      document.getElementById('timer-display').textContent = `${minutes}:${seconds}`;
+    } else {
+      clearInterval(timerInterval);
+      document.getElementById('timer-display').textContent = '⏰';
+    }
+  }, 1000);
 });
 
-// Inicializa
-updateStopwatch();
-// Sons de clique
-const clickSound = document.getElementById('click-sound');
+// ===================== Pomodoro =====================
+let pomodoroInterval;
+let pomodoroTime = 25 * 60;
 
-function playClickSound() {
-  clickSound.currentTime = 0;
-  clickSound.play();
+function updatePomodoroDisplay() {
+  const minutes = Math.floor(pomodoroTime / 60).toString().padStart(2, '0');
+  const seconds = (pomodoroTime % 60).toString().padStart(2, '0');
+  document.getElementById('pomodoro-display').textContent = `${minutes}:${seconds}`;
 }
 
-// Salvar/Carregar voltas do localStorage
-function saveLaps() {
-  const laps = Array.from(document.querySelectorAll('.lap-item')).map(lap => lap.textContent);
-  localStorage.setItem('stopwatchLaps', JSON.stringify(laps));
-  localStorage.setItem('lapCount', lapCount.toString());
-}
+document.getElementById('start-pomodoro').addEventListener('click', () => {
+  clearInterval(pomodoroInterval);
+  pomodoroInterval = setInterval(() => {
+    if (pomodoroTime > 0) {
+      pomodoroTime--;
+      updatePomodoroDisplay();
+    } else {
+      clearInterval(pomodoroInterval);
+      document.getElementById('pomodoro-display').textContent = '☕ Tempo de pausa!';
+    }
+  }, 1000);
+});
 
-function loadLaps() {
-  const savedLaps = JSON.parse(localStorage.getItem('stopwatchLaps')) || [];
-  const savedLapCount = parseInt(localStorage.getItem('lapCount')) || 1;
-  
-  lapCount = savedLapCount;
-  savedLaps.forEach(lapText => {
-    const lapItem = document.createElement('div');
-    lapItem.className = 'lap-item';
-    lapItem.textContent = lapText;
-    lapsContainer.prepend(lapItem);
+document.getElementById('reset-pomodoro').addEventListener('click', () => {
+  clearInterval(pomodoroInterval);
+  pomodoroTime = 25 * 60;
+  updatePomodoroDisplay();
+});
+
+updatePomodoroDisplay();
+
+// ===================== Clima (OpenWeather) =====================
+const apiKey = 'INSIRA_SUA_API_KEY_AQUI'; // Substitua pela sua chave da OpenWeather
+
+function fetchWeather() {
+  if (!navigator.geolocation) {
+    document.getElementById('weather-info').textContent = 'Geolocalização não suportada.';
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(pos => {
+    const { latitude, longitude } = pos.coords;
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}&lang=pt_br`)
+      .then(res => res.json())
+      .then(data => {
+        const { name, main, weather } = data;
+        document.getElementById('weather-info').textContent = `${name}: ${main.temp}°C, ${weather[0].description}`;
+      })
+      .catch(() => {
+        document.getElementById('weather-info').textContent = 'Erro ao buscar clima.';
+      });
   });
 }
 
-// Modifique o addLap() para salvar automaticamente
-function addLap() {
-  const lapItem = document.createElement('div');
-  lapItem.className = 'lap-item';
-  lapItem.textContent = `Volta ${lapCount++}: ${swMinutes.textContent}:${swSeconds.textContent}.${swMilliseconds.textContent}`;
-  lapsContainer.prepend(lapItem);
-  saveLaps();
-}
-
-// Atualize os event listeners para tocar som
-[startBtn, stopBtn, resetBtn, lapBtn].forEach(btn => {
-  btn.addEventListener('click', () => playClickSound());
-});
-
-// Carregue as voltas ao iniciar
-document.addEventListener('DOMContentLoaded', loadLaps);
-<!-- Adicione no <body> -->
-<audio id="click-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-modern-click-box-check-1120.mp3" preload="auto"></audio>
-
-<!-- Substitua os botões existentes por: -->
-<div class="stopwatch-controls">
-  <button id="start-sw" class="btn-3d">▶ Iniciar</button>
-  <button id="stop-sw" class="btn-3d">⏸ Parar</button>
-  <button id="reset-sw" class="btn-3d">⏹ Zerar</button>
-  <button id="lap-sw" class="btn-3d">⏱ Volta</button>
-</div>
-/* script.js */
-
-// Relógio Digital
-function updateClock() {
-  const now = new Date();
-  let hours = now.getHours();
-  const minutes = now.getMinutes().toString().padStart(2, '0');
-  const seconds = now.getSeconds().toString().padStart(2, '0');
-  const ampm = hours >= 12 ? 'PM' : 'AM';
-
-  hours = hours % 12;
-  hours = hours ? hours : 12;
-  document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-  document.getElementById('minutes').textContent = minutes;
-  document.getElementById('seconds').textContent = seconds;
-  document.getElementById('ampm').textContent = ampm;
-
-  const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  document.getElementById('date').textContent = now.toLocaleDateString('pt-BR', dateOptions);
-}
-setInterval(updateClock, 1000);
-updateClock();
-
-// Cronômetro
-let swInterval;
-let swTime = 0;
-let swRunning = false;
-
-function updateStopwatch() {
-  const minutes = Math.floor(swTime / 6000).toString().padStart(2, '0');
-  const seconds = Math.floor((swTime % 6000) / 100).toString().padStart(2, '0');
-  const milliseconds = (swTime % 100).toString().padStart(2, '0');
-
-  document.getElementById('sw-minutes').textContent = minutes;
-  document.getElementById('sw-seconds').textContent = seconds;
-  document.getElementById('sw-milliseconds').textContent = milliseconds;
-}
-
-function startStopwatch() {
-  if (!swRunning) {
-    swRunning = true;
-    swInterval = setInterval(() => {
-      swTime++;
-      updateStopwatch();
-    }, 10);
-  }
-}
-
-function stopStopwatch() {
-  clearInterval(swInterval);
-  swRunning = false;
-}
-
-function resetStopwatch() {
-  clearInterval(swInterval);
-  swTime = 0;
-  swRunning = false;
-  updateStopwatch();
-  document.getElementById('laps-container').innerHTML = '';
-}
-
-function recordLap() {
-  if (swTime > 0) {
-    const lap = document.createElement('div');
-    const minutes = Math.floor(swTime / 6000).toString().padStart(2, '0');
-    const seconds = Math.floor((swTime % 6000) / 100).toString().padStart(2, '0');
-    const milliseconds = (swTime % 100).toString().padStart(2, '0');
-    lap.textContent = `Volta: ${minutes}:${seconds}:${milliseconds}`;
-    document.getElementById('laps-container').appendChild(lap);
-  }
-}
-
-document.getElementById('start-sw').addEventListener('click', startStopwatch);
-document.getElementById('stop-sw').addEventListener('click', stopStopwatch);
-document.getElementById('reset-sw').addEventListener('click', resetStopwatch);
-document.getElementById('lap-sw').addEventListener('click', recordLap);
-
-// Tema Escuro
-const themeToggle = document.getElementById('theme-toggle');
-themeToggle.addEventListener('click', () => {
-  document.body.classList.toggle('dark-theme');
-  if (document.body.classList.contains('dark-theme')) {
-    themeToggle.textContent = 'Tema Claro';
-  } else {
-    themeToggle.textContent = 'Tema Escuro';
-  }
-});
-
+fetchWeather();
