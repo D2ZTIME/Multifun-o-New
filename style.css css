@@ -2,88 +2,90 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-  background-color: #f4f4f4;
-  color: #111;
+  display: flex;
   height: 100vh;
-  display: flex;
-}
-
-.app {
-  display: flex;
-  width: 100%;
+  background-color: #f4f4f4;
+  color: #333;
 }
 
 .sidebar {
-  width: 220px;
+  width: 200px;
   background-color: #fff;
-  border-right: 1px solid #ddd;
+  border-right: 1px solid #e0e0e0;
+  padding-top: 20px;
   display: flex;
   flex-direction: column;
-  padding: 1rem;
-  gap: 1rem;
-}
-
-.menu-btn {
-  padding: 1rem;
-  font-size: 1.1rem;
-  background: none;
-  border: none;
-  text-align: left;
-  cursor: pointer;
-  border-radius: 8px;
-  transition: background 0.2s;
-}
-
-.menu-btn:hover, .menu-btn.active {
-  background-color: #e0e0e0;
-}
-
-.content {
-  flex: 1;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  gap: 15px;
 }
 
-.section {
+.sidebar button {
+  width: 90%;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  color: #333;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.sidebar button:hover,
+.sidebar button.active {
+  background-color: #eaeaea;
+}
+
+.sidebar button i {
+  font-size: 18px;
+}
+
+.main {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.clock,
+#alarm,
+#stopwatch,
+#pomodoro {
   display: none;
-  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
   text-align: center;
 }
 
-.section.active {
-  display: block;
+.active-section {
+  display: flex !important;
 }
 
-.clock {
-  font-size: 5rem;
+.time {
+  font-size: 60px;
   font-weight: bold;
-  margin-bottom: 1rem;
 }
 
 .date {
-  font-size: 1.5rem;
-  color: #555;
+  font-size: 20px;
+  color: #666;
 }
 
-button {
-  margin: 0.25rem;
-  padding: 0.5rem 1rem;
-  border: none;
-  background-color: #1976d2;
-  color: white;
-  font-size: 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.2s;
+h2 {
+  margin-bottom: 10px;
 }
 
-button:hover {
-  background-color: #125a9c;
-}
+input, select, button {
+  font-size: 16px;
+  padding: 8px
