@@ -1,17 +1,3 @@
-// Navegação entre seções
-document.querySelectorAll('.menu-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.menu-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-
-    const sectionToShow = btn.getAttribute('data-section') + '-section';
-    document.querySelectorAll('.section').forEach(sec => {
-      sec.classList.remove('active');
-    });
-    document.getElementById(sectionToShow).classList.add('active');
-  });
-});
-
 * {
   margin: 0;
   padding: 0;
