@@ -112,3 +112,10 @@ button:active {
   padding: 0.5rem;
   border-bottom: 1px solid #eee;
 }
+/* Para debug - mostra borda vermelha em elementos ativos */
+.section.active {
+  border: 2px solid red !important;
+}
+.menu-btn.active {
+  border: 2px solid blue !important;
+}
