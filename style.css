@@ -17,83 +17,26 @@ body {
   transition: background-color 0.3s, color 0.3s;
 }
 
-header {
+.clock-container {
   text-align: center;
-  margin-bottom: 30px;
 }
 
-h1 {
-  font-size: 2rem;
+.clock {
+  font-size: 3rem;
   margin-bottom: 10px;
 }
 
-nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-}
-
-nav button {
-  padding: 10px 20px;
-  border: none;
-  background-color: #ddd;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-nav button.active,
-nav button:hover {
-  background-color: #007BFF;
-  color: white;
-}
-
-main {
-  width: 100%;
-  max-width: 500px;
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  transition: background 0.3s, color 0.3s;
-}
-
-section {
-  display: none;
-}
-
-section.active {
-  display: block;
-}
-
-section h2 {
+.date {
+  font-size: 1.2rem;
   margin-bottom: 20px;
-  font-size: 1.5rem;
-  text-align: center;
 }
 
-#digital-clock,
-#stopwatch-display,
-#timer-display,
-#pomodoro-display {
-  font-size: 3rem;
-  text-align: center;
+.stopwatch-container {
+  font-size: 2.7rem;
   margin-bottom: 20px;
-  font-weight: bold;
 }
 
-input[type="time"],
-input[type="number"] {
-  padding: 10px;
-  margin: 5px;
-  width: calc(50% - 12px);
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-button {
+.stopwatch-controls button {
   padding: 10px 15px;
   margin: 5px;
   border: none;
@@ -102,135 +45,120 @@ button {
   border-radius: 5px;
   cursor: pointer;
   transition: opacity 0.2s;
+  font-size: 1rem;
 }
 
-button:hover {
+.stopwatch-controls button:hover {
   opacity: 0.9;
 }
 
-#alarm-status,
-#weather-info {
-  text-align: center;
-  margin-top: 15px;
+.laps {
+  margin-top: 10px;
   font-size: 1rem;
-  font-style: italic;
+  text-align: left;
 }
 
-/* Cronômetro com fonte maior */
-.stopwatch-container .stopwatch {
-  font-size: 200%;
-  text-align: center;
-  font-weight: bold;
-  margin-bottom: 20px;
+.controls {
+  margin-top: 20px;
 }
 
-/* Dark Mode */
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: #1e1e1e;
-    color: #f4f4f4;
-  }
+.controls button {
+  padding: 10px 15px;
+  border: none;
+  background-color: #444;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
-  main {
-    background: #2b2b2b;
-  }
-
-  nav button {
-    background-color: #444;
-    color: #ddd;
-  }
-
-  nav button.active,
-  nav button:hover {
-    background-color: #2196F3;
-    color: white;
-  }
-
-  input[type="time"],
-  input[type="number"] {
-    background: #3c3c3c;
-    color: #fff;
-    border: 1px solid #666;
-  }
-
-  button {
-    background-color: #2196F3;
-  }
-
-  #alarm-status,
-  #weather-info {
-    color: #ccc;
-  }
+.controls button:hover {
+  background-color: #666;
 }
 
 /* script.js */
 
-// Tabs
-const navButtons = document.querySelectorAll('nav button');
-const sections = document.querySelectorAll('main section');
-
-navButtons.forEach((button, index) => {
-  button.addEventListener('click', () => {
-    navButtons.forEach(btn => btn.classList.remove('active'));
-    sections.forEach(sec => sec.classList.remove('active'));
-
-    button.classList.add('active');
-    sections[index].classList.add('active');
-  });
-});
-
-// Digital Clock
-function updateDigitalClock() {
+// Relógio Digital
+function updateClock() {
   const now = new Date();
-  const clock = document.getElementById('digital-clock');
-  if (clock) clock.textContent = now.toLocaleTimeString();
+  let hours = now.getHours();
+  const minutes = now.getMinutes().toString().padStart(2, '0');
+  const seconds = now.getSeconds().toString().padStart(2, '0');
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+
+  hours = hours % 12;
+  hours = hours ? hours : 12;
+  document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+  document.getElementById('minutes').textContent = minutes;
+  document.getElementById('seconds').textContent = seconds;
+  document.getElementById('ampm').textContent = ampm;
+
+  const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  document.getElementById('date').textContent = now.toLocaleDateString('pt-BR', dateOptions);
 }
-setInterval(updateDigitalClock, 1000);
-updateDigitalClock();
+setInterval(updateClock, 1000);
+updateClock();
 
-// Stopwatch
-let stopwatchInterval;
-let swMinutes = 0, swSeconds = 0, swMilliseconds = 0;
+// Cronômetro
+let swInterval;
+let swTime = 0;
+let swRunning = false;
 
-function updateStopwatchDisplay() {
-  document.getElementById('sw-minutes').textContent = swMinutes.toString().padStart(2, '0');
-  document.getElementById('sw-seconds').textContent = swSeconds.toString().padStart(2, '0');
-  document.getElementById('sw-milliseconds').textContent = swMilliseconds.toString().padStart(2, '0');
+function updateStopwatch() {
+  const minutes = Math.floor(swTime / 6000).toString().padStart(2, '0');
+  const seconds = Math.floor((swTime % 6000) / 100).toString().padStart(2, '0');
+  const milliseconds = (swTime % 100).toString().padStart(2, '0');
+
+  document.getElementById('sw-minutes').textContent = minutes;
+  document.getElementById('sw-seconds').textContent = seconds;
+  document.getElementById('sw-milliseconds').textContent = milliseconds;
 }
 
-document.getElementById('start-sw').addEventListener('click', () => {
-  clearInterval(stopwatchInterval);
-  stopwatchInterval = setInterval(() => {
-    swMilliseconds++;
-    if (swMilliseconds >= 100) {
-      swMilliseconds = 0;
-      swSeconds++;
-    }
-    if (swSeconds >= 60) {
-      swSeconds = 0;
-      swMinutes++;
-    }
-    updateStopwatchDisplay();
-  }, 10);
-});
+function startStopwatch() {
+  if (!swRunning) {
+    swRunning = true;
+    swInterval = setInterval(() => {
+      swTime++;
+      updateStopwatch();
+    }, 10);
+  }
+}
 
-document.getElementById('stop-sw').addEventListener('click', () => {
-  clearInterval(stopwatchInterval);
-});
+function stopStopwatch() {
+  clearInterval(swInterval);
+  swRunning = false;
+}
 
-document.getElementById('reset-sw').addEventListener('click', () => {
-  clearInterval(stopwatchInterval);
-  swMinutes = 0;
-  swSeconds = 0;
-  swMilliseconds = 0;
-  updateStopwatchDisplay();
-});
+function resetStopwatch() {
+  clearInterval(swInterval);
+  swTime = 0;
+  swRunning = false;
+  updateStopwatch();
+  document.getElementById('laps-container').innerHTML = '';
+}
 
-document.getElementById('lap-sw').addEventListener('click', () => {
-  const lapTime = `${swMinutes.toString().padStart(2, '0')}:${swSeconds.toString().padStart(2, '0')}:${swMilliseconds.toString().padStart(2, '0')}`;
-  const lapElement = document.createElement('div');
-  lapElement.textContent = `Volta: ${lapTime}`;
-  document.getElementById('laps-container').appendChild(lapElement);
-});
+function recordLap() {
+  if (swTime > 0) {
+    const lap = document.createElement('div');
+    const minutes = Math.floor(swTime / 6000).toString().padStart(2, '0');
+    const seconds = Math.floor((swTime % 6000) / 100).toString().padStart(2, '0');
+    const milliseconds = (swTime % 100).toString().padStart(2, '0');
+    lap.textContent = `Volta: ${minutes}:${seconds}:${milliseconds}`;
+    document.getElementById('laps-container').appendChild(lap);
+  }
+}
 
-updateStopwatchDisplay();
+document.getElementById('start-sw').addEventListener('click', startStopwatch);
+document.getElementById('stop-sw').addEventListener('click', stopStopwatch);
+document.getElementById('reset-sw').addEventListener('click', resetStopwatch);
+document.getElementById('lap-sw').addEventListener('click', recordLap);
+
+// Tema Escuro
+const themeToggle = document.getElementById('theme-toggle');
+themeToggle.addEventListener('click', () => {
+  document.body.classList.toggle('dark-theme');
+  if (document.body.classList.contains('dark-theme')) {
+    themeToggle.textContent = 'Tema Claro';
+  } else {
+    themeToggle.textContent = 'Tema Escuro';
+  }
+});
