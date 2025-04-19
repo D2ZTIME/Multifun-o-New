@@ -1,69 +1,62 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Relógio Digital</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relógio Online</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <aside class="sidebar">
-      <div class="logo">⏱️</div>
-      <nav>
-        <button class="nav-btn active" data-section="clock"><span>🕒</span> Relógio</button>
-        <button class="nav-btn" data-section="alarm"><span>⏰</span> Alarme</button>
-        <button class="nav-btn" data-section="stopwatch"><span>⏱️</span> Cronômetro</button>
-        <button class="nav-btn" data-section="timer"><span>⏳</span> Timer</button>
-        <button class="nav-btn" data-section="pomodoro"><span>🍅</span> Pomodoro</button>
-        <button class="nav-btn" data-section="weather"><span>🌦️</span> Tempo</button>
-      </nav>
-    </aside>
-    <main class="content">
-      <section id="clock" class="section active">
-        <h1 id="clock-time">00:00:00</h1>
-        <p id="clock-date">Data</p>
-      </section>
+  <div class="clock-container">
+    <div class="clock">
+      <span id="hours">00</span>
+      <span class="separator">:</span>
+      <span id="minutes">00</span>
+      <span class="separator">:</span>
+      <span id="seconds">00</span>
+      <span id="ampm">PM</span>
+    </div>
+    <div class="date" id="date">Sexta-feira, 12 de Janeiro 2024</div>
+    <div class="stopwatch-container">
 
-      <section id="alarm" class="section">
-        <h2>Configurar Alarme</h2>
-        <input type="time" id="alarm-time">
-        <button onclick="setAlarm()">Definir Alarme</button>
-        <p id="alarm-status"></p>
-      </section>
+    <span id="sw-minutes">00</span>
+    <span class="separator">:</span>
+    <span id="sw-seconds">00</span>
+    <span class="separator">:</span>
+    <span id="sw-milliseconds">00</span>
+  </div>
+  <div class="stopwatch-controls">
+    <button id="start-sw">▶ Iniciar</button>
+    <button id="stop-sw">⏸ Parar</button>
+    <button id="reset-sw">⏹ Zerar</button>
+    <button id="lap-sw">⏱ Volta</button>
+  </div>
+  <div class="laps" id="laps-container"></div>
+</div>
+  </div>
 
-      <section id="stopwatch" class="section">
-        <h2>Cronômetro</h2>
-        <div id="stopwatch-display">00:00</div>
-        <div class="controls">
-          <button onclick="startStopwatch()">Iniciar</button>
-          <button onclick="pauseStopwatch()">Pausar</button>
-          <button onclick="resetStopwatch()">Resetar</button>
-        </div>
-      </section>
-
-      <section id="timer" class="section">
-        <h2>Timer</h2>
-        <p>(Em breve)</p>
-      </section>
-
-      <section id="pomodoro" class="section">
-        <h2>Pomodoro</h2>
-        <div id="pomodoro-display">25:00</div>
-        <div class="controls">
-          <button onclick="startPomodoro()">Iniciar Pomodoro</button>
-          <button onclick="resetPomodoro()">Resetar</button>
-        </div>
-      </section>
-
-      <section id="weather" class="section">
-        <h2>Tempo</h2>
-        <p>(Em breve)</p>
-      </section>
-    </main>
+  <!-- Futuros botôes para extras (cronômetro, alarme) -->
+  <div class="controls">
+    <button id="theme-toggle">Tema Escuro</button>
   </div>
 
   <script src="script.js"></script>
 </body>
 </html>
+
+<div class="stopwatch-container">
+  <div class="stopwatch">
+    <span id="sw-minutes">00</span>
+    <span class="separator">:</span>
+    <span id="sw-seconds">00</span>
+    <span class="separator">:</span>
+    <span id="sw-milliseconds">00</span>
+  </div>
+  <div class="stopwatch-controls">
+    <button id="start-sw">▶ Iniciar</button>
+    <button id="stop-sw">⏸ Parar</button>
+    <button id="reset-sw">⏹ Zerar</button>
+    <button id="lap-sw">⏱ Volta</button>
+  </div>
+  <div class="laps" id="laps-container"></div>
+</div>
