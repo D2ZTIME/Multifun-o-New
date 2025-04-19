@@ -124,3 +124,6 @@ input {
   color: white;
   border-color: #555;
 }
+body {
+  transition: background 0.5s ease;
+}
