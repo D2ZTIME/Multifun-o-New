@@ -6,38 +6,85 @@
 }
 
 body {
-:root {
-  --bg-dark: #121212;
-  --bg-darker: #000000;
-  --text-light: #e0e0e0;
-  --accent-color: #4a6fa5;
+  background-color: #000000; /* Preto puro */
+  color: #ffffff; /* Texto branco para contraste */
 }
 
-body {
-  background: var(--bg-dark);
-  color: var(--text-light);
+.app {
+  display: flex;
+  width: 100%;
 }
 
 .sidebar {
-  background: var(--bg-darker);
-  border-right: 1px solid #333;
+  width: 200px;
+  background: white;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
 }
 
 .menu-btn {
-  color: var(--text-light);
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+
+.menu-btn:hover {
+  background: #e0e0e0;
 }
 
 .menu-btn.active {
-  background: var(--accent-color);
+  background: #4a6fa5;
+  color: white;
+}
+
+.content {
+  flex: 1;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.section {
+  display: none;
+  text-align: center;
+}
+
+.section.active {
+  display: block;
+}
+
+#clock {
+  font-size: 4rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#date {
+  font-size: 1.5rem;
+  color: #666;
 }
 
 button {
-  background: var(--accent-color);
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  background: #4a6fa5;
   color: white;
+  cursor: pointer;
 }
 
 input {
-  background: #333;
-  color: white;
-  border-color: #555;
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
 }
