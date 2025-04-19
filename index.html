@@ -1,65 +1,50 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Relógio Multifuncional</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relógio Online</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>Relógio Multifuncional</h1>
-    <nav>
-      <button class="active">Relógio</button>
-      <button>Alarme</button>
-      <button>Cronômetro</button>
-      <button>Timer</button>
-      <button>Pomodoro</button>
-      <button>Clima</button>
-    </nav>
-  </header>
+  <div class="clock-container">
+    <!-- Relógio Digital -->
+    <div class="clock">
+      <span id="hours">00</span>
+      <span class="separator">:</span>
+      <span id="minutes">00</span>
+      <span class="separator">:</span>
+      <span id="seconds">00</span>
+      <span id="ampm">PM</span>
+    </div>
 
-  <main>
-    <section class="active">
-      <h2>Relógio Digital</h2>
-      <div id="digital-clock">--:--:--</div>
-    </section>
+    <!-- Data -->
+    <div class="date" id="date">Sexta-feira, 12 de Janeiro 2024</div>
 
-    <section>
-      <h2>Alarme</h2>
-      <input type="time" id="alarm-time">
-      <button id="set-alarm">Definir Alarme</button>
-      <div id="alarm-status"></div>
-    </section>
+    <!-- Cronômetro -->
+    <div class="stopwatch-container">
+      <div class="stopwatch">
+        <span id="sw-minutes">00</span>
+        <span class="separator">:</span>
+        <span id="sw-seconds">00</span>
+        <span class="separator">:</span>
+        <span id="sw-milliseconds">00</span>
+      </div>
+      <div class="stopwatch-controls">
+        <button id="start-sw">▶ Iniciar</button>
+        <button id="stop-sw">⏸ Parar</button>
+        <button id="reset-sw">⏹ Zerar</button>
+        <button id="lap-sw">⏱ Volta</button>
+      </div>
+      <div class="laps" id="laps-container"></div>
+    </div>
+  </div>
 
-    <section>
-      <h2>Cronômetro</h2>
-      <div id="stopwatch-display">00:00</div>
-      <button id="start-stopwatch">Iniciar</button>
-      <button id="stop-stopwatch">Parar</button>
-      <button id="reset-stopwatch">Resetar</button>
-    </section>
+  <!-- Botões de controle adicionais -->
+  <div class="controls">
+    <button id="theme-toggle">Tema Escuro</button>
+  </div>
 
-    <section>
-      <h2>Timer</h2>
-      <input type="number" id="timer-minutes" placeholder="Minutos" />
-      <button id="start-timer">Iniciar Timer</button>
-      <div id="timer-display">00:00</div>
-    </section>
-
-    <section>
-      <h2>Pomodoro</h2>
-      <div id="pomodoro-display">25:00</div>
-      <button id="start-pomodoro">Iniciar Pomodoro</button>
-      <button id="reset-pomodoro">Resetar</button>
-    </section>
-
-    <section>
-      <h2>Clima Atual</h2>
-      <div id="weather-info">Buscando clima...</div>
-    </section>
-  </main>
-
-  <script src="js/script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
