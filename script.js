@@ -18,16 +18,17 @@ setInterval(updateClock, 1000);
 updateClock();
 
 // Navegação entre seções
-document.querySelectorAll('.menu-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.menu-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+const menuButtons = document.querySelectorAll('.menu-btn');
+const sections = document.querySelectorAll('.section');
 
-    const sectionToShow = btn.getAttribute('data-section') + '-section';
-    document.querySelectorAll('.section').forEach(sec => {
-      sec.classList.remove('active');
-    });
-    document.getElementById(sectionToShow).classList.add('active');
+menuButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    document.querySelector('.menu-btn.active').classList.remove('active');
+    button.classList.add('active');
+
+    sections.forEach(section => section.classList.remove('active'));
+    const sectionId = button.dataset.section + '-section';
+    document.getElementById(sectionId).classList.add('active');
   });
 });
 
