@@ -8,7 +8,6 @@ function updateClock() {
     month: 'long',
     year: 'numeric'
   });
-
   document.getElementById('clock').textContent = time;
   document.getElementById('date').textContent = date;
 
@@ -28,7 +27,8 @@ menuButtons.forEach(button => {
 
     sections.forEach(section => section.classList.remove('active'));
     const sectionId = button.dataset.section + '-section';
-    document.getElementById(sectionId).classList.add('active');
+document.getElementById(sectionId).classList.add('active');
+
   });
 });
 
