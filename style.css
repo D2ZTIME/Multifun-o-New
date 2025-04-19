@@ -7,7 +7,7 @@
 
 body {
   background-color: #121212; /* Preto profundo */
-  color: #121212; /* Cinza claro para texto */
+  color: #4a6fa5; /* Cinza claro para texto */
   height: 100vh;
   display: flex;
   transition: background 0.3s ease; /* Transição suave */
