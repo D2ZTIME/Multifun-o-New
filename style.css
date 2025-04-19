@@ -6,8 +6,7 @@
 }
 
 body {
-  background-color: #f4f4f4;
-  color: #111;
+  background-color: #f5f5f5;
   height: 100vh;
   display: flex;
 }
@@ -18,43 +17,44 @@ body {
 }
 
 .sidebar {
-  width: 220px;
-  background-color: #fff;
-  border-right: 1px solid #ddd;
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-  gap: 1rem;
+  width: 200px;
+  background: white;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
 }
 
 .menu-btn {
-  padding: 1rem;
-  font-size: 1.1rem;
-  background: none;
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
   border: none;
+  background: none;
   text-align: left;
   cursor: pointer;
-  border-radius: 8px;
-  transition: all 0.2s;
+  border-radius: 5px;
+  transition: all 0.3s;
 }
 
-.menu-btn:hover, .menu-btn.active {
-  background-color: #e0e0e0;
-  transform: translateX(5px);
+.menu-btn:hover {
+  background: #e0e0e0;
+}
+
+.menu-btn.active {
+  background: #4a6fa5;
+  color: white;
 }
 
 .content {
   flex: 1;
-  padding: 2rem;
+  padding: 30px;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
 .section {
   display: none;
-  width: 100%;
   text-align: center;
 }
 
@@ -62,60 +62,30 @@ body {
   display: block;
 }
 
-.clock {
-  font-size: 5rem;
+#clock {
+  font-size: 4rem;
   font-weight: bold;
-  margin-bottom: 1rem;
+  margin-bottom: 10px;
 }
 
-.date {
+#date {
   font-size: 1.5rem;
-  color: #555;
+  color: #666;
 }
 
-/* Botões */
 button {
-  padding: 0.8rem 1.5rem;
-  margin: 0.5rem;
+  padding: 10px 20px;
+  margin: 5px;
   border: none;
-  border-radius: 8px;
+  border-radius: 5px;
+  background: #4a6fa5;
+  color: white;
   cursor: pointer;
-  font-size: 1rem;
-  transition: all 0.2s;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
-
-button:active {
-  transform: translateY(1px);
-}
-
-/* Cronômetro e Timer */
-#stopwatch-display, #timer-display, #pomodoro-display {
-  font-size: 3rem;
-  margin: 1rem 0;
-  font-family: monospace;
-}
-
-#laps-container {
-  max-height: 200px;
-  overflow-y: auto;
-  margin-top: 1rem;
-  width: 100%;
-}
-
-.lap-item {
-  padding: 0.5rem;
-  border-bottom: 1px solid #eee;
-}
-/* Para debug - mostra borda vermelha em elementos ativos */
-.section.active {
-  border: 2px solid red !important;
-}
-.menu-btn.active {
-  border: 2px solid blue !important;
+input {
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
 }
