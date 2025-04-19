@@ -1,155 +1,203 @@
-/* Reset e fonte padrão */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
 body {
-  background-color: #f4f4f4;
-  color: #333;
+  font-family: 'Arial', sans-serif;
+  background: #f5f5f5;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-header {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-h1 {
-  font-size: 2rem;
-  margin-bottom: 10px;
-}
-
-nav {
-  display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  transition: background 0.3s;
 }
 
-nav button {
-  padding: 10px 20px;
-  border: none;
-  background-color: #ddd;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-nav button.active,
-nav button:hover {
-  background-color: #007BFF;
-  color: white;
-}
-
-main {
-  width: 100%;
-  max-width: 500px;
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: background 0.3s, color 0.3s;
-}
-
-section {
-  display: none;
-}
-
-section.active {
-  display: block;
-}
-
-section h2 {
-  margin-bottom: 20px;
-  font-size: 1.5rem;
+.clock-container {
   text-align: center;
 }
 
-#digital-clock,
-#stopwatch-display,
-#timer-display,
-#pomodoro-display {
-  font-size: 3rem;
-  text-align: center;
-  margin-bottom: 20px;
+.clock {
+  font-size: 5rem;
   font-weight: bold;
+  color: #333;
 }
 
-input[type="time"],
-input[type="number"] {
-  padding: 10px;
-  margin: 5px;
-  width: calc(50% - 12px);
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+.separator {
+  margin: 0 0.5rem;
+}
+
+.date {
+  font-size: 1.5rem;
+  color: #666;
+  margin-top: 1rem;
+}
+
+.controls {
+  margin-top: 2rem;
 }
 
 button {
-  padding: 10px 15px;
-  margin: 5px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* Tema escuro */
+body.dark {
+  background: #222;
+  color: #fff;
+}
+
+body.dark .clock,
+body.dark .date {
+  color: #fff;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .clock {
+    font-size: 3rem;
+  }
+}
+
+/* Cronômetro */
+.stopwatch-container {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.stopwatch {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.stopwatch-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.stopwatch-controls button {
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
   border: none;
-  background-color: #007BFF;
-  color: white;
   border-radius: 5px;
   cursor: pointer;
-  transition: opacity 0.2s;
 }
 
-button:hover {
-  opacity: 0.9;
+#start-sw {
+  background: #4CAF50;
+  color: white;
 }
 
-#alarm-status,
-#weather-info {
+#stop-sw {
+  background: #f44336;
+  color: white;
+}
+
+#reset-sw {
+  background: #2196F3;
+  color: white;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .stopwatch {
+    font-size: 2rem;
+  }
+}
+/* Cronômetro (centralizado abaixo da data) */
+.stopwatch-container {
+  margin-top: 1rem;
   text-align: center;
-  margin-top: 15px;
+}
+
+.stopwatch {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+  margin: 0.5rem 0;
+}
+
+.stopwatch-controls {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.stopwatch-controls button {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.stopwatch-controls button:hover {
+  opacity: 0.8;
+}
+
+#start-sw { background: #4CAF50; color: white; }
+#stop-sw { background: #f44336; color: white; }
+#reset-sw { background: #2196F3; color: white; }
+#lap-sw { background: #FFC107; color: #333; }
+
+/* Lista de voltas */
+.laps {
+  max-height: 150px;
+  overflow-y: auto;
+  margin-top: 1rem;
+  border-top: 1px solid #ddd;
+  padding-top: 1rem;
+}
+
+.lap-item {
+  padding: 0.5rem;
+  border-bottom: 1px solid #eee;
+  font-family: monospace;
+}
+
+/* Tema escuro */
+body.dark .stopwatch,
+body.dark .lap-item {
+  color: #fff;
+}
+
+body.dark .laps {
+  border-color: #444;
+}
+/* Botões 3D */
+.btn-3d {
+  position: relative;
+  padding: 0.8rem 1.5rem;
   font-size: 1rem;
-  font-style: italic;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: white;
+  box-shadow: 
+    0 4px 0 rgba(0, 0, 0, 0.2),
+    0 5px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.1s ease;
 }
 
-/* Modo escuro automático */
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: #1e1e1e;
-    color: #f4f4f4;
-  }
-
-  main {
-    background: #2b2b2b;
-  }
-
-  nav button {
-    background-color: #444;
-    color: #ddd;
-  }
-
-  nav button.active,
-  nav button:hover {
-    background-color: #2196F3;
-    color: white;
-  }
-
-  input[type="time"],
-  input[type="number"] {
-    background: #3c3c3c;
-    color: #fff;
-    border: 1px solid #666;
-  }
-
-  button {
-    background-color: #2196F3;
-  }
-
-  #alarm-status,
-  #weather-info {
-    color: #ccc;
-  }
+.btn-3d:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
 }
+
+#start-sw { background: #4CAF50; }
+#stop-sw { background: #f44336; }
+#reset-sw { background: #2196F3; }
+#lap-sw { background: #FFC107; color: #333; }
+
+/* Efeito flutuante */
+.btn-3d:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 0 rgba(0, 0, 0, 0.2),
+    0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
