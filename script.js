@@ -125,3 +125,91 @@ document.addEventListener('DOMContentLoaded', loadLaps);
   <button id="reset-sw" class="btn-3d">⏹ Zerar</button>
   <button id="lap-sw" class="btn-3d">⏱ Volta</button>
 </div>
+/* script.js */
+
+// Relógio Digital
+function updateClock() {
+  const now = new Date();
+  let hours = now.getHours();
+  const minutes = now.getMinutes().toString().padStart(2, '0');
+  const seconds = now.getSeconds().toString().padStart(2, '0');
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+
+  hours = hours % 12;
+  hours = hours ? hours : 12;
+  document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+  document.getElementById('minutes').textContent = minutes;
+  document.getElementById('seconds').textContent = seconds;
+  document.getElementById('ampm').textContent = ampm;
+
+  const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  document.getElementById('date').textContent = now.toLocaleDateString('pt-BR', dateOptions);
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+// Cronômetro
+let swInterval;
+let swTime = 0;
+let swRunning = false;
+
+function updateStopwatch() {
+  const minutes = Math.floor(swTime / 6000).toString().padStart(2, '0');
+  const seconds = Math.floor((swTime % 6000) / 100).toString().padStart(2, '0');
+  const milliseconds = (swTime % 100).toString().padStart(2, '0');
+
+  document.getElementById('sw-minutes').textContent = minutes;
+  document.getElementById('sw-seconds').textContent = seconds;
+  document.getElementById('sw-milliseconds').textContent = milliseconds;
+}
+
+function startStopwatch() {
+  if (!swRunning) {
+    swRunning = true;
+    swInterval = setInterval(() => {
+      swTime++;
+      updateStopwatch();
+    }, 10);
+  }
+}
+
+function stopStopwatch() {
+  clearInterval(swInterval);
+  swRunning = false;
+}
+
+function resetStopwatch() {
+  clearInterval(swInterval);
+  swTime = 0;
+  swRunning = false;
+  updateStopwatch();
+  document.getElementById('laps-container').innerHTML = '';
+}
+
+function recordLap() {
+  if (swTime > 0) {
+    const lap = document.createElement('div');
+    const minutes = Math.floor(swTime / 6000).toString().padStart(2, '0');
+    const seconds = Math.floor((swTime % 6000) / 100).toString().padStart(2, '0');
+    const milliseconds = (swTime % 100).toString().padStart(2, '0');
+    lap.textContent = `Volta: ${minutes}:${seconds}:${milliseconds}`;
+    document.getElementById('laps-container').appendChild(lap);
+  }
+}
+
+document.getElementById('start-sw').addEventListener('click', startStopwatch);
+document.getElementById('stop-sw').addEventListener('click', stopStopwatch);
+document.getElementById('reset-sw').addEventListener('click', resetStopwatch);
+document.getElementById('lap-sw').addEventListener('click', recordLap);
+
+// Tema Escuro
+const themeToggle = document.getElementById('theme-toggle');
+themeToggle.addEventListener('click', () => {
+  document.body.classList.toggle('dark-theme');
+  if (document.body.classList.contains('dark-theme')) {
+    themeToggle.textContent = 'Tema Claro';
+  } else {
+    themeToggle.textContent = 'Tema Escuro';
+  }
+});
+
