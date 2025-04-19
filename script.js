@@ -39,58 +39,32 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
- // Variáveis do cronômetro
-let stopwatchInterval;
-let startTime;
-let elapsedTime = 0;
-let isRunning = false;
-
-// Elementos
-const stopwatchDisplay = document.getElementById('stopwatch-display');
-
-// Formatação do tempo
-function formatTime(ms) {
-  const date = new Date(ms);
-  const hours = date.getUTCHours().toString().padStart(2, '0');
-  const minutes = date.getUTCMinutes().toString().padStart(2, '0');
-  const seconds = date.getUTCSeconds().toString().padStart(2, '0');
-  const milliseconds = date.getUTCMilliseconds().toString().padStart(3, '0');
+  // Cronômetro
+  let stopwatchInterval;
+  let seconds = 0;
   
-  return `${hours}:${minutes}:${seconds}<span class="milliseconds">:${milliseconds}</span>`;
-}
-
-// Atualização do display
-function updateStopwatch() {
-  const currentTime = isRunning ? Date.now() - startTime + elapsedTime : elapsedTime;
-  stopwatchDisplay.innerHTML = formatTime(currentTime);
-}
-
-// Event Listeners
-document.getElementById('start-stopwatch').addEventListener('click', () => {
-  if (!isRunning) {
-    startTime = Date.now();
-    isRunning = true;
-    stopwatchInterval = setInterval(updateStopwatch, 10); // Atualiza a cada 10ms
-  }
-});
-
-document.getElementById('pause-stopwatch').addEventListener('click', () => {
-  if (isRunning) {
-    elapsedTime += Date.now() - startTime;
-    isRunning = false;
+  document.getElementById('start-stopwatch').addEventListener('click', function() {
     clearInterval(stopwatchInterval);
-  }
-});
+    stopwatchInterval = setInterval(function() {
+      seconds++;
+      const hrs = Math.floor(seconds / 3600);
+      const mins = Math.floor((seconds % 3600) / 60);
+      const secs = seconds % 60;
+      document.getElementById('stopwatch-display').textContent = 
+        `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    }, 1000);
+  });
 
-document.getElementById('reset-stopwatch').addEventListener('click', () => {
-  clearInterval(stopwatchInterval);
-  isRunning = false;
-  elapsedTime = 0;
-  stopwatchDisplay.innerHTML = formatTime(0);
-});
+  document.getElementById('pause-stopwatch').addEventListener('click', function() {
+    clearInterval(stopwatchInterval);
+  });
 
-// Inicialização
-stopwatchDisplay.innerHTML = formatTime(0);
+  document.getElementById('reset-stopwatch').addEventListener('click', function() {
+    clearInterval(stopwatchInterval);
+    seconds = 0;
+    document.getElementById('stopwatch-display').textContent = '00:00:00';
+  });
+
   // Timer
   let timerInterval;
   
