@@ -35,11 +35,12 @@ body {
   text-align: left;
   cursor: pointer;
   border-radius: 8px;
-  transition: background 0.2s;
+  transition: all 0.2s;
 }
 
 .menu-btn:hover, .menu-btn.active {
   background-color: #e0e0e0;
+  transform: translateX(5px);
 }
 
 .content {
@@ -70,4 +71,44 @@ body {
 .date {
   font-size: 1.5rem;
   color: #555;
+}
+
+/* Botões */
+button {
+  padding: 0.8rem 1.5rem;
+  margin: 0.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+/* Cronômetro e Timer */
+#stopwatch-display, #timer-display, #pomodoro-display {
+  font-size: 3rem;
+  margin: 1rem 0;
+  font-family: monospace;
+}
+
+#laps-container {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.lap-item {
+  padding: 0.5rem;
+  border-bottom: 1px solid #eee;
 }
