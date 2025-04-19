@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>D2Z Clock</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <button class="menu-btn active" data-section="clock">🕒 Relógio</button>
+      <button class="menu-btn" data-section="alarm">⏰ Alarme</button>
+      <button class="menu-btn" data-section="stopwatch">⏱ Cronômetro</button>
+      <button class="menu-btn" data-section="timer">⏳ Timer</button>
+      <button class="menu-btn" data-section="pomodoro">🍅 Pomodoro</button>
+      <button class="menu-btn" data-section="weather">🌤 Tempo</button>
+    </aside>
+
+    <main class="content">
+      <section id="clock-section" class="section active">
+        <div id="clock" class="clock">00:00:00</div>
+        <div id="date" class="date">Segunda-feira, 1 de Janeiro de 2025</div>
+      </section>
+      <section id="alarm-section" class="section">Alarme (em breve)</section>
+      <section id="stopwatch-section" class="section">Cronômetro (em breve)</section>
+      <section id="timer-section" class="section">Timer (em breve)</section>
+      <section id="pomodoro-section" class="section">Pomodoro (em breve)</section>
+      <section id="weather-section" class="section">Tempo (em breve)</section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
