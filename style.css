@@ -6,7 +6,9 @@
 }
 
 body {
-  background-color: #f5f5f5;
+   background-color: #000000; /* Preto puro */
+  color: #ffffff; /* Texto branco para contraste */
+}
   height: 100vh;
   display: flex;
 }
