@@ -18,17 +18,23 @@ setInterval(updateClock, 1000);
 updateClock();
 
 // ===== NAVEGAÇÃO =====
-const menuButtons = document.querySelectorAll('.menu-btn');
-const sections = document.querySelectorAll('.section');
-
-menuButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    document.querySelector('.menu-btn.active').classList.remove('active');
-    button.classList.add('active');
-
-    sections.forEach(section => section.classList.remove('active'));
-    const sectionId = button.dataset.section + '-section';
-    document.getElementById(sectionId).classList.add('active');
+document.addEventListener('DOMContentLoaded', function() {
+  const menuButtons = document.querySelectorAll('.menu-btn');
+  const sections = document.querySelectorAll('.section');
+  
+  menuButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      // Remove a classe 'active' de todos os botões e seções
+      menuButtons.forEach(btn => btn.classList.remove('active'));
+      sections.forEach(section => section.classList.remove('active'));
+      
+      // Adiciona 'active' apenas no botão clicado
+      this.classList.add('active');
+      
+      // Mostra a seção correspondente
+      const sectionId = this.getAttribute('data-section') + '-section';
+      document.getElementById(sectionId).classList.add('active');
+    });
   });
 });
 
