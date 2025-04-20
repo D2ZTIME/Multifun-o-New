@@ -143,12 +143,27 @@ input:focus {
   background: #4a6fa5;
   border-radius: 4px;
 }
-.stopwatch-display {
-  font-size: 50px; /* Tamanho aumentado */
+/* Adicione estas regras */
+#stopwatch-display {
+  font-size: 35px; /* Tamanho aumentado */
   font-family: 'Courier New', monospace; /* Fonte monoespaçada */
-  letter-spacing: 1px;
-  color: #4a6fa5; /* Cor azul para destaque */
-  margin: 15px 0;
+  letter-spacing: 2px;
+  margin: 20px 0;
+}
+#stopwatch-display span {
+  display: inline-block;
+  min-width: 50px;
+  text-align: center;
+}
+
+.buttons {
+  margin-top: 20px;
+}
+#stopwatch-display {
+  background: #2d2d2d;
+  padding: 15px 25px;
+  border-radius: 10px;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
 }
 
 .milliseconds {
